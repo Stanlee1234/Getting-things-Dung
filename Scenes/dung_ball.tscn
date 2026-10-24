@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dj36ql68134i2"]
+
+[ext_resource type="Texture2D" uid="uid://d0cnnfbu05ths" path="res://Assets/paperball.png" id="1_7ksyx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ksyx"]
+friction = 0.8
+bounce = 0.15
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ksyx"]
+radius = 29.0
+
+[node name="DungBall" type="RigidBody2D" unique_id=1694008017]
+collision_layer = 2
+collision_mask = 3
+mass = 3.0
+physics_material_override = SubResource("PhysicsMaterial_7ksyx")
+continuous_cd = 1
+linear_damp = 0.5
+angular_damp = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1939661963]
+position = Vector2(10, 1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_7ksyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=855382782]
+shape = SubResource("CircleShape2D_7ksyx")

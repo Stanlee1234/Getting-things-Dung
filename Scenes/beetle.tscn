@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dm6jrtb4jl7yd"]
+
+[ext_resource type="Texture2D" uid="uid://ddxmxgyyfy8mn" path="res://icon.svg" id="1_i667w"]
+[ext_resource type="Script" uid="uid://c14rwt6nttrbo" path="res://Scripts/beetle.gd" id="1_u0t3v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ksyx"]
+size = Vector2(20, 30)
+
+[node name="Beetle" type="CharacterBody2D" unique_id=633333318]
+collision_mask = 3
+platform_on_leave = 2
+platform_floor_layers = 4294967293
+script = ExtResource("1_u0t3v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=204912367]
+position = Vector2(-7.1525574e-07, -4.7683716e-07)
+scale = Vector2(0.15624999, 0.234375)
+texture = ExtResource("1_i667w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1193994825]
+shape = SubResource("RectangleShape2D_7ksyx")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1515742276]
+enabled = false
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ci58w1ohgxhip"]
+
+[ext_resource type="PackedScene" uid="uid://dm6jrtb4jl7yd" path="res://Scenes/beetle.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://dj36ql68134i2" path="res://Scenes/dung_ball.tscn" id="2_qxrlw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_soorf"]
+size = Vector2(1152, 337)
+
+[sub_resource type="Gradient" id="Gradient_ebmjs"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_soorf"]
+gradient = SubResource("Gradient_ebmjs")
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ee3mo"]
+points = PackedVector2Array(152, 128, 0, 128, -136, 128, 0, 40)
+
+[node name="game" type="Node2D" unique_id=139282020]
+
+[node name="Beetle" parent="." unique_id=633333318 instance=ExtResource("1_ebmjs")]
+position = Vector2(130, 276)
+
+[node name="GroundTemporary" type="StaticBody2D" parent="." unique_id=869006847]
+position = Vector2(0, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTemporary" unique_id=1945404413]
+position = Vector2(577, 169.5)
+shape = SubResource("RectangleShape2D_soorf")
+
+[node name="TextureRect" type="TextureRect" parent="GroundTemporary" unique_id=1774339560]
+offset_right = 1152.0
+offset_bottom = 337.0
+texture = SubResource("GradientTexture1D_soorf")
+
+[node name="GroundTemporary2" type="StaticBody2D" parent="." unique_id=349189064]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTemporary2" unique_id=1822496769]
+position = Vector2(312, 200)
+shape = SubResource("ConvexPolygonShape2D_ee3mo")
+
+[node name="DungBall" parent="." unique_id=1694008017 instance=ExtResource("2_qxrlw")]
+position = Vector2(349, 99)
