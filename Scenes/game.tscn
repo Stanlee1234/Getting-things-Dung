@@ -6,9 +6,12 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_i6g32"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://brgtimopl38sa" path="res://Assets/spritesheet.png" id="6_i6g32"]
+[ext_resource type="Script" uid="uid://ci6fibvcjafvy" path="res://Scripts/game.gd" id="8_game"]
 
 [sub_resource type="Resource" id="Resource_v158k"]
 script = ExtResource("5_1l0tm")
+duration = 0.6
+transition = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i6g32"]
 texture = ExtResource("6_i6g32")
@@ -16,7 +19,7 @@ texture_region_size = Vector2i(64, 30)
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 32, -15, 32, 15, -32, 15)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 12.092041, -15, 32, -5.769231, 32, 15, -32, 15)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 32, -15, 32, 15, -32, 15)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1l0tm"]
 texture = ExtResource("6_i6g32")
@@ -24,7 +27,7 @@ margins = Vector2i(0, 18)
 texture_region_size = Vector2i(64, 30)
 0:0/0 = 0
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -8.076923, 12.3076935, 15, -32, 15)
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 32, 15, -32, 15)
 
 [sub_resource type="TileSet" id="TileSet_soorf"]
 tile_size = Vector2i(64, 30)
@@ -33,12 +36,15 @@ sources/1 = SubResource("TileSetAtlasSource_i6g32")
 sources/2 = SubResource("TileSetAtlasSource_1l0tm")
 
 [node name="game" type="Node2D" unique_id=139282020]
+script = ExtResource("8_game")
 
 [node name="Beetle" parent="." unique_id=633333318 instance=ExtResource("1_ebmjs")]
-position = Vector2(130, 276)
+z_index = -1
+position = Vector2(240, 276)
 
 [node name="DungBall" parent="." unique_id=1694008017 instance=ExtResource("2_qxrlw")]
-position = Vector2(320, -528)
+z_index = 1
+position = Vector2(320, 276)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=396689853]
 
@@ -49,8 +55,8 @@ polygon = PackedVector2Array(584, 336, 680, 296, 696, 256, 704, 200, 696, 160, 6
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1522580430]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(225, -126)
-zoom = Vector2(1.5, 1.5)
+position = Vector2(280, 276)
+zoom = Vector2(3, 3)
 process_callback = 0
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=493583646]
@@ -59,23 +65,51 @@ process_physics_priority = 300
 script = ExtResource("3_wowpa")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=560058755 node_paths=PackedStringArray("follow_targets")]
+[node name="PcamGroup" type="Node2D" parent="." unique_id=560058755 node_paths=PackedStringArray("follow_targets")]
 top_level = true
-position = Vector2(225, -126)
+position = Vector2(280, 276)
 script = ExtResource("4_i6g32")
+priority = 15
 follow_mode = 3
 follow_targets = [NodePath("../Beetle"), NodePath("../DungBall")]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(3, 3)
 tween_resource = SubResource("Resource_v158k")
 tween_on_load = false
 follow_damping = true
-follow_damping_value = Vector2(0.5, 0.5)
+follow_damping_value = Vector2(0.3, 0.3)
 auto_zoom = true
 auto_zoom_min = 1.5
 auto_zoom_max = 3.0
 auto_zoom_margin = Vector4(80, 80, 80, 80)
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
+[node name="PcamPlayer" type="Node2D" parent="." unique_id=782349182 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(240, 276)
+script = ExtResource("4_i6g32")
+priority = 10
+follow_mode = 1
+follow_target = NodePath("../Beetle")
+zoom = Vector2(3, 3)
+tween_resource = SubResource("Resource_v158k")
+tween_on_load = false
+follow_damping = true
+follow_damping_value = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="PcamBall" type="Node2D" parent="." unique_id=983172641 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(320, 276)
+script = ExtResource("4_i6g32")
+follow_mode = 1
+follow_target = NodePath("../DungBall")
+zoom = Vector2(2.5, 2.5)
+tween_resource = SubResource("Resource_v158k")
+tween_on_load = false
+follow_damping = true
+follow_damping_value = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1022606205]
-tile_map_data = PackedByteArray("AAABAAoAAgADAAAAAAABAAsAAQACAAAAAAABAAwAAQABAAAAAAAAAAwAAQABAAAAAAAAAAsAAQABAAAAAAACAAwAAQABAAAAAAACAA0AAQABAAAAAAADAAwAAQABAAAAAAADAA0AAQABAAAAAAABAA0AAQABAAAAAAAAAA0AAQABAAAAAAAEAAwAAQABAAAAAAAFAAwAAQABAAAAAAAGAAwAAQABAAAAAAAHAAwAAQACAAAAABAIAAwAAQABAAAAAAAJAAwAAQABAAAAAAAKAAwAAQABAAAAAAALAAwAAQABAAAAAAALAA0AAQABAAAAAAAKAA0AAQABAAAAAAAJAA0AAQABAAAAAAAIAA0AAQABAAAAAAAHAA0AAQABAAAAAAAGAA0AAQABAAAAAAAFAA0AAQABAAAAAAAEAA0AAQABAAAAAAAHAAsAAgADAAAAABAIAAsAAQACAAAAABAJAAsAAQABAAAAAAAKAAsAAQABAAAAAAAKAAoAAQABAAAAAAAKAAkAAQABAAAAAAAKAAgAAQABAAAAAAAKAAYAAQABAAAAAAAKAAcAAQABAAAAAAAKAAQAAQABAAAAAAAKAAUAAQABAAAAAAAIAAoAAgADAAAAABAJAAoAAQABAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAoAAgADAAAAAAABAAsAAQACAAAAAAABAAwAAQABAAAAAAAAAAwAAQABAAAAAAAAAAsAAQABAAAAAAACAAwAAQABAAAAAAACAA0AAQABAAAAAAADAAwAAQABAAAAAAADAA0AAQABAAAAAAABAA0AAQABAAAAAAAAAA0AAQABAAAAAAAEAAwAAQABAAAAAAAFAAwAAQABAAAAAAAGAAwAAQABAAAAAAAHAAwAAQACAAAAABAIAAwAAQABAAAAAAAJAAwAAQABAAAAAAAKAAwAAQABAAAAAAALAAwAAQABAAAAAAALAA0AAQABAAAAAAAKAA0AAQABAAAAAAAJAA0AAQABAAAAAAAIAA0AAQABAAAAAAAHAA0AAQABAAAAAAAGAA0AAQABAAAAAAAFAA0AAQABAAAAAAAEAA0AAQABAAAAAAAHAAsAAgADAAAAABAIAAsAAQACAAAAABAJAAsAAQABAAAAAAAKAAsAAQABAAAAAAAKAAoAAQABAAAAAAAKAAkAAQABAAAAAAAKAAgAAQABAAAAAAAKAAYAAQABAAAAAAAKAAcAAQABAAAAAAAKAAQAAQABAAAAAAAKAAUAAQABAAAAAAAIAAoAAgADAAAAABAJAAoAAQABAAAAAAAAAAkAAgADAAAAAAD//wgAAgADAAAAAAD+/wcAAgADAAAAAAD9/wYAAgADAAAAAAD8/wUAAgADAAAAAAD7/wQAAgADAAAAAAD6/wMAAgADAAAAAAD5/wIAAgADAAAAAAD4/wEAAgADAAAAAAAAAAoAAQACAAAAAAD//wkAAQACAAAAAAD+/wgAAQACAAAAAAD9/wcAAQACAAAAAAD8/wYAAQACAAAAAAD7/wUAAQACAAAAAAD6/wQAAQACAAAAAAD5/wMAAQACAAAAAAD4/wIAAQACAAAAAAD4/wMAAQABAAAAAAD4/wQAAQABAAAAAAD4/wUAAQABAAAAAAD4/wYAAQABAAAAAAD4/wcAAQABAAAAAAD4/wgAAQABAAAAAAD4/wkAAQABAAAAAAD4/woAAQABAAAAAAD4/wsAAQABAAAAAAD4/wwAAQABAAAAAAD5/wkAAQABAAAAAAD5/woAAQABAAAAAAD5/wsAAQABAAAAAAD5/wwAAQABAAAAAAD6/wkAAQABAAAAAAD6/woAAQABAAAAAAD6/wsAAQABAAAAAAD6/wwAAQABAAAAAAD7/wkAAQABAAAAAAD7/woAAQABAAAAAAD7/wsAAQABAAAAAAD7/wwAAQABAAAAAAD8/wkAAQABAAAAAAD8/woAAQABAAAAAAD8/wsAAQABAAAAAAD8/wwAAQABAAAAAAD9/wkAAQABAAAAAAD9/woAAQABAAAAAAD9/wsAAQABAAAAAAD9/wwAAQABAAAAAAD+/wkAAQABAAAAAAD+/woAAQABAAAAAAD+/wsAAQABAAAAAAD+/wwAAQABAAAAAAD//woAAQABAAAAAAD//wsAAQABAAAAAAD//wwAAQABAAAAAAD5/wgAAQABAAAAAAD6/wgAAQABAAAAAAD7/wgAAQABAAAAAAD8/wgAAQABAAAAAAD9/wgAAQABAAAAAAD5/wUAAQABAAAAAAD5/wYAAQABAAAAAAD5/wcAAQABAAAAAAD6/wUAAQABAAAAAAD6/wYAAQABAAAAAAD6/wcAAQABAAAAAAD7/wYAAQABAAAAAAD7/wcAAQABAAAAAAD8/wcAAQABAAAAAAD5/wQAAQABAAAAAAA=")
 tile_set = SubResource("TileSet_soorf")

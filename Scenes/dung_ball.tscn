@@ -30,17 +30,59 @@ texture = ExtResource("1_7ksyx")
 shape = SubResource("CircleShape2D_7ksyx")
 
 [node name="LandParticles" type="CPUParticles2D" parent="." unique_id=1597474268]
+z_index = 2
+z_as_relative = false
 emitting = false
-amount = 14
-lifetime = 0.35000000000000003
+amount = 16
+lifetime = 0.35
 one_shot = true
 explosiveness = 1.0
-spread = 180.0
-gravity = Vector2(0, 250)
-initial_velocity_min = 50.0
-initial_velocity_max = 130.0
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 180)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
 damping_min = 30.0
 damping_max = 60.0
 scale_amount_min = 2.0
 scale_amount_max = 4.5
 color = Color(0.9452769, 0.9371796, 0.9309246, 1)
+
+[node name="PaperDropParticles" type="CPUParticles2D" parent="." unique_id=1847192841]
+z_index = 2
+z_as_relative = false
+emitting = false
+amount = 22
+lifetime = 0.55
+one_shot = true
+explosiveness = 0.75
+emission_shape = 3
+emission_rect_extents = Vector2(30, 8)
+direction = Vector2(0, 1)
+spread = 40.0
+gravity = Vector2(0, 420)
+initial_velocity_min = 70.0
+initial_velocity_max = 150.0
+damping_min = 25.0
+damping_max = 50.0
+scale_amount_min = 2.5
+scale_amount_max = 5.0
+color = Color(0.96, 0.96, 0.93, 1)
+
+[node name="PaperBurstParticles" type="CPUParticles2D" parent="." unique_id=1938501824]
+z_index = 2
+z_as_relative = false
+emitting = false
+amount = 36
+lifetime = 0.65
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 280)
+initial_velocity_min = 120.0
+initial_velocity_max = 260.0
+damping_min = 40.0
+damping_max = 85.0
+scale_amount_min = 2.5
+scale_amount_max = 6.0
+color = Color(0.98, 0.98, 0.95, 1)
