@@ -11,6 +11,7 @@ collision_mask = 3
 platform_on_leave = 2
 platform_floor_layers = 4294967293
 script = ExtResource("1_u0t3v")
+push_force = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=204912367]
 position = Vector2(-7.1525574e-07, -4.7683716e-07)

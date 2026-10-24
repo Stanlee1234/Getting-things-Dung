@@ -4,7 +4,7 @@ extends CharacterBody2D
 # Import Variables
 #---------------------------------------------------->
 @onready var sprite = $Sprite2D
-
+@onready var base_scale: Vector2 = sprite.scale
 
 #---------------------------------------------------->
 # Export Variables
@@ -41,7 +41,14 @@ func _physics_process(delta: float) -> void:
 	var direction:float = Input.get_axis("left","right")
 	var on_ball: bool = is_on_floor() and get_last_slide_collision() and get_last_slide_collision().get_collider() is RigidBody2D
 	var current_friction: float = ball_friction if on_ball else friction
-
+	
+		#Character Snap
+	if is_on_floor():
+		var target_angle = get_floor_normal().angle() + PI / 2.0
+		rotation = lerp_angle(rotation, target_angle, 15.0 * delta)
+	else:
+		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)
+	
 	# Gravity + Jump
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -57,13 +64,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
 		charge_time = 0.0
 		charging = false
-	
-	#Character Snap
-	if is_on_floor():
-		var target_angle = get_floor_normal().angle() + PI / 2.0
-		rotation = lerp_angle(rotation, target_angle, 15.0 * delta)
-	else:
-		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)
 
 	# Movement
 	if direction != 0.0:
@@ -71,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, current_friction * delta)
 	
+	#Fixing ball pushing bug, where the player was glitching.
 	var pre_vel_x: float = velocity.x
 	move_and_slide()
 	
@@ -80,8 +81,20 @@ func _physics_process(delta: float) -> void:
 		var col = get_slide_collision(i)
 		if col.get_collider() is RigidBody2D:
 			var normal = col.get_normal()
-			if abs(normal.x) > 0.8 and normal.y > -0.7:
-				col.get_collider().apply_central_impulse(Vector2(-normal.x, 0) * 10)
+			if abs(normal.x) > 0.3 and normal.y > -0.7:
+				var rb = col.get_collider() as RigidBody2D
+				
+				# Push along the floor tangent instead of flat horiz
+				var push_dir: Vector2
+				if is_on_floor():
+					var floor_norm = get_floor_normal()
+					push_dir = Vector2(-floor_norm.y, floor_norm.x) * sign(direction)
+					if push_dir.dot(Vector2(direction, 0)) < 0:
+						push_dir = -push_dir
+				else:
+					push_dir = Vector2(direction, 0)
+				
+				rb.apply_central_impulse(push_dir * push_force)
 				pushed_ball = true
 
 	# Walking speed bugfix

@@ -12,7 +12,6 @@ radius = 29.0
 [node name="DungBall" type="RigidBody2D" unique_id=1694008017]
 collision_layer = 2
 collision_mask = 3
-mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_7ksyx")
 continuous_cd = 1
 linear_damp = 0.5
