@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dj36ql68134i2"]
 
 [ext_resource type="Texture2D" uid="uid://d0cnnfbu05ths" path="res://Assets/paperball.png" id="1_7ksyx"]
+[ext_resource type="Script" uid="uid://d37ecs4nnk7ii" path="res://Scripts/dung_ball.gd" id="1_n2isv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ksyx"]
 friction = 0.8
@@ -14,8 +15,11 @@ collision_layer = 2
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_7ksyx")
 continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 4
 linear_damp = 0.5
 angular_damp = 1.0
+script = ExtResource("1_n2isv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1939661963]
 position = Vector2(10, 1)
@@ -24,3 +28,19 @@ texture = ExtResource("1_7ksyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=855382782]
 shape = SubResource("CircleShape2D_7ksyx")
+
+[node name="LandParticles" type="CPUParticles2D" parent="." unique_id=1597474268]
+emitting = false
+amount = 14
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 250)
+initial_velocity_min = 50.0
+initial_velocity_max = 130.0
+damping_min = 30.0
+damping_max = 60.0
+scale_amount_min = 2.0
+scale_amount_max = 4.5
+color = Color(0.9452769, 0.9371796, 0.9309246, 1)

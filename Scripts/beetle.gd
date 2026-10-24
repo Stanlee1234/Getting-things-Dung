@@ -9,6 +9,11 @@ extends CharacterBody2D
 var sprite_squash: Vector2 = Vector2.ONE
 var was_on_floor_last_frame: bool = true
 const FEET_OFFSET: float = 15.0
+# Phantom Camera Shenanigans lol
+@onready var pcam: PhantomCamera2D = get_parent().get_node_or_null("PhantomCamera2D")
+var trauma: float = 0.0
+# Ball Kicking
+@onready var kick_particles: CPUParticles2D = $KickParticles
 
 #---------------------------------------------------->
 # Export Variables
@@ -49,7 +54,13 @@ func _physics_process(delta: float) -> void:
 	var direction: float = Input.get_axis("left", "right")
 	var on_ball: bool = is_on_floor() and get_last_slide_collision() and get_last_slide_collision().get_collider() is RigidBody2D
 	var current_friction: float = ball_friction if on_ball else friction
-
+	
+	if trauma > 0.0 and is_instance_valid(pcam):
+		trauma = max(0.0, trauma-delta * 3.0)
+		var shake: float = pow(trauma, 2) * 12.0
+		var offset: Vector2 = Vector2(randf_range(-shake, shake), randf_range(-shake, shake))
+		pcam.emit_noise(Transform2D(0.0, offset))
+	
 	_handle_ground_snap(delta)
 	_handle_jump(delta)
 	
@@ -90,11 +101,24 @@ func _handle_jump(delta: float) -> void:
 			var launch_x: float = sign(ball_in_contact.global_position.x - global_position.x)
 			if launch_x == 0:
 				launch_x = 1.0
-			var launch_dir: Vector2 = Vector2(launch_x, -1.0).normalized()
-			
+			var launch_dir: Vector2
+			if is_on_floor():
+				var floor_norm: Vector2 = get_floor_normal()
+				var floor_tangent: Vector2 = Vector2(-floor_norm.y, floor_norm.x) * launch_x
+				if floor_tangent.dot(Vector2(launch_x, 0)) < 0:
+					floor_tangent = -floor_tangent
+				# Always 45° relative to the floor surface
+				launch_dir = (floor_tangent + floor_norm).normalized()
+			else:
+				launch_dir = Vector2(launch_x, -1.0).normalized()
 			# Apply the jump
 			var boost_impulse: float = lerp(min_ball_boost, max_ball_boost, charge_time / max_charge_time)
 			ball_in_contact.apply_central_impulse(launch_dir * boost_impulse)
+			add_shake(lerp(0.35, 0.85, charge_time / max_charge_time))
+			# Apply particles
+			kick_particles.global_position = (global_position + ball_in_contact.global_position) * 0.5
+			kick_particles.restart()
+			kick_particles.emitting = true
 			
 			# Recoil animations
 			sprite_squash = Vector2(1.25, 0.75)
@@ -175,3 +199,6 @@ func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
 	# Walking speed bugfix
 	if pushed_ball and direction != 0:
 		velocity.x = pre_vel_x
+
+func add_shake(amount: float) -> void:
+	trauma = min(trauma + amount, 1.0)

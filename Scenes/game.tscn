@@ -38,7 +38,7 @@ sources/2 = SubResource("TileSetAtlasSource_1l0tm")
 position = Vector2(130, 276)
 
 [node name="DungBall" parent="." unique_id=1694008017 instance=ExtResource("2_qxrlw")]
-position = Vector2(312, 288)
+position = Vector2(320, -528)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=396689853]
 
@@ -49,8 +49,8 @@ polygon = PackedVector2Array(584, 336, 680, 296, 696, 256, 704, 200, 696, 160, 6
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1522580430]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(221, 282)
-zoom = Vector2(3, 3)
+position = Vector2(225, -126)
+zoom = Vector2(1.5, 1.5)
 process_callback = 0
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=493583646]
@@ -61,11 +61,11 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=560058755 node_paths=PackedStringArray("follow_targets")]
 top_level = true
-position = Vector2(221, 282)
+position = Vector2(225, -126)
 script = ExtResource("4_i6g32")
 follow_mode = 3
 follow_targets = [NodePath("../Beetle"), NodePath("../DungBall")]
-zoom = Vector2(3, 3)
+zoom = Vector2(1.5, 1.5)
 tween_resource = SubResource("Resource_v158k")
 tween_on_load = false
 follow_damping = true
