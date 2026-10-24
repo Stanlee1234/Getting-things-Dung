@@ -4,7 +4,11 @@ extends CharacterBody2D
 # Import Variables
 #---------------------------------------------------->
 @onready var sprite = $Sprite2D
+#Squishing animation variables
 @onready var base_scale: Vector2 = sprite.scale
+var sprite_squash: Vector2 = Vector2.ONE
+var was_on_floor_last_frame: bool = true
+const FEET_OFFSET: float = 15.0
 
 #---------------------------------------------------->
 # Export Variables
@@ -20,13 +24,13 @@ extends CharacterBody2D
 @export_group("Jump")
 @export var max_jump_v: float = -400.0
 @export var min_jump_v: float = -180.0
-@export var max_charge_time = 0.9
+@export var max_charge_time: float = 0.9
 
 
 #---------------------------------------------------->
 # Variables
 #---------------------------------------------------->
-var charge_time = 0.0
+var charge_time: float = 0.0
 var charging: bool = false
 
 #---------------------------------------------------->
@@ -38,45 +42,93 @@ func _ready() -> void:
 	floor_constant_speed = true
 
 func _physics_process(delta: float) -> void:
-	var direction:float = Input.get_axis("left","right")
+	var direction: float = Input.get_axis("left", "right")
 	var on_ball: bool = is_on_floor() and get_last_slide_collision() and get_last_slide_collision().get_collider() is RigidBody2D
 	var current_friction: float = ball_friction if on_ball else friction
+
+	_handle_ground_snap(delta)
+	_handle_jump(delta)
 	
-		#Character Snap
-	if is_on_floor():
-		var target_angle = get_floor_normal().angle() + PI / 2.0
-		rotation = lerp_angle(rotation, target_angle, 15.0 * delta)
-	else:
-		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)
+	# Prevent walking while charging a jump
+	if charging:
+		direction = 0.0
+		
+	_handle_movement(direction, current_friction, delta)
+	_handle_squash_animation(delta)
 	
-	# Gravity + Jump
+	# Motion & Ball Pushing
+	var pre_vel_x: float = velocity.x
+	move_and_slide()
+	_handle_ball_pushing(direction, pre_vel_x)
+	
+#---------------------------------------------------->
+# Jump + Gravity Logic
+#---------------------------------------------------->
+func _handle_jump(delta: float) -> void:
+	# Fall / Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		charge_time = 0.0
+	# Charge Jump
 	elif Input.is_action_pressed("up"):
-		#Deactivate modulate after switching to acutal sprites
-		sprite.modulate = Color(1.0, 0.1, 1.0, 1.0)
 		charge_time = min(charge_time + delta, max_charge_time)
-		direction = 0.0
 		charging = true
+		
+		# Squish animation while charging
+		var charge_pct: float = charge_time / max_charge_time
+		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
+	# Release Jump
 	elif Input.is_action_just_released("up"):
 		sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 		velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
 		charge_time = 0.0
 		charging = false
+		
+		# Stretch animation on launch
+		sprite_squash = Vector2(0.7, 1.35)
 
-	# Movement
+#---------------------------------------------------->
+# Horizontal Movement
+#---------------------------------------------------->
+func _handle_movement(direction: float, current_friction: float, delta: float) -> void:
 	if direction != 0.0:
 		velocity.x = move_toward(velocity.x, direction * speed, accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, current_friction * delta)
+
+#---------------------------------------------------->
+# Ground Snap + Visual Rotation
+#---------------------------------------------------->
+func _handle_ground_snap(delta: float) -> void:
+	if is_on_floor():
+		var target_angle: float = get_floor_normal().angle() + PI / 2.0
+		rotation = lerp_angle(rotation, target_angle, 15.0 * delta)
+	else:
+		rotation = lerp_angle(rotation, 0.0, 10.0 * delta)
+
+#---------------------------------------------------->
+# Squash + Stretch Animation
+#---------------------------------------------------->
+func _handle_squash_animation(delta: float) -> void:
+	# Impact squish on landing
+	if is_on_floor() and not was_on_floor_last_frame and velocity.y >= 0:
+		sprite_squash = Vector2(1.3, 0.7)
+	was_on_floor_last_frame = is_on_floor()
 	
-	#Fixing ball pushing bug, where the player was glitching.
-	var pre_vel_x: float = velocity.x
-	move_and_slide()
+	# Smoothly spring back to normal when not actively holding jump
+	if not charging:
+		sprite_squash = sprite_squash.lerp(Vector2.ONE, 12.0 * delta)
 	
-	# Ball Pushing
+	# Apply scale & keep feet planted on floor
+	sprite.scale = base_scale * sprite_squash
+	sprite.position.y = FEET_OFFSET * (1.0 - sprite_squash.y)
+
+#---------------------------------------------------->
+# Ball Push Handling
+#---------------------------------------------------->
+func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
 	var pushed_ball: bool = false
+	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
 		if col.get_collider() is RigidBody2D:

@@ -30326,3 +30326,543 @@ unexpected key or value, expected newline, `#`
 2026-10-24T05:31:40.570792Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
 2026-10-24T05:31:40.570837Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
 2026-10-24T05:31:41.098050Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:34:14.853918Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-NbpSP4"
+2026-10-24T05:34:14.853941Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-NbpSP4"
+2026-10-24T05:34:14.853953Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:34:14.857227Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:34:14.858177Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:34:14.858186Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:34:14.858264Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:34:14.858394Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:34:15.079964Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-eiixdK"
+2026-10-24T05:34:15.079984Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-eiixdK"
+2026-10-24T05:34:15.079996Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:34:15.086383Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:34:15.087250Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:34:15.087257Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:34:15.087334Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:34:15.087534Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:34:15.087649Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:34:15.090269Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:34:15.090293Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:34:15.094167Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:34:15.094203Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:34:15.094225Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("a7c9384a4d6835358a512c2409d387eaa41e9eef782d3c42e91f3f328ab0bcd5")] }
+2026-10-24T05:34:15.094434Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:34:15.094509Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:34:15.100036Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:34:15.217742Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:34:24.637019Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-VOBEo9"
+2026-10-24T05:34:24.643108Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 1 watched changes, attempting to commit...
+2026-10-24T05:34:24.644058Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:34:24.644073Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:34:24.644150Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:34:24.644327Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:34:24.664732Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-VOBEo9"
+2026-10-24T05:34:24.664761Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:34:24.671457Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 2 watched changes, attempting to commit...
+2026-10-24T05:34:24.672198Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:34:24.672227Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:34:24.672351Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:34:24.672512Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:34:24.860373Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-GLmXGG"
+2026-10-24T05:34:24.860393Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-GLmXGG"
+2026-10-24T05:34:24.860411Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:34:24.867082Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:34:24.867891Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:34:24.867900Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:34:24.867979Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:34:24.868190Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:34:24.868309Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:34:24.868843Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:34:24.868862Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:34:24.871248Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:34:24.871283Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:34:24.871305Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("3256c00bd82bc76a77b57890073c856024625ea69ee61d9f1109db36b9aa97af")] }
+2026-10-24T05:34:24.871557Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:34:24.871621Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:34:25.135409Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:05.843014Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-G2EVPF"
+2026-10-24T05:38:05.843033Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-G2EVPF"
+2026-10-24T05:38:05.843045Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:38:05.845144Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:38:05.846283Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:38:05.846301Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:38:05.846384Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:38:05.846559Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scenes/beetle.tscn": Modified}
+2026-10-24T05:38:05.846974Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:38:05.850882Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:38:05.850899Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:38:05.851596Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:38:05.851673Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:38:05.851706Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("07f5b9c5afa4a33bb5299f6f8d5e7cd042d25d5d1a04fc6b99997caca0ce0c62")] }
+2026-10-24T05:38:05.851923Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:38:05.852057Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:38:06.007062Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:06.038388Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-GC1J5S"
+2026-10-24T05:38:06.038406Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-GC1J5S"
+2026-10-24T05:38:06.038421Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:38:06.040620Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:38:06.041687Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:38:06.041700Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:38:06.041780Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:38:06.041913Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:38:06.042059Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:38:06.043060Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:38:06.043081Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:38:06.045892Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:38:06.045946Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:38:06.045974Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("0c0a5dba2924f83722782570b23b012349223a5ce10c6dfd2ae3657233a24a95")] }
+2026-10-24T05:38:06.046262Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:38:06.047002Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:38:06.343115Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:42.295901Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-BNRMEa"
+2026-10-24T05:38:42.295922Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-BNRMEa"
+2026-10-24T05:38:42.295935Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:38:42.299209Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:38:42.300304Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:38:42.300318Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:38:42.300400Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:38:42.300531Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scenes/beetle.tscn": Modified}
+2026-10-24T05:38:42.300943Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:38:42.303627Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:38:42.303661Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:38:42.304171Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:38:42.304222Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:38:42.304243Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("48822ba77574bff933b47cf70b2408193d3afcc86f7fe0e73cb7fc045ceb9e38")] }
+2026-10-24T05:38:42.304514Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:38:42.304568Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:38:42.510654Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:42.522243Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-ywhpBu"
+2026-10-24T05:38:42.522268Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-ywhpBu"
+2026-10-24T05:38:42.522284Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:38:42.523340Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:38:42.524263Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:38:42.524272Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:38:42.524349Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:38:42.524495Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:38:42.524567Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:38:42.525446Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:38:42.525467Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:38:42.528219Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:38:42.528277Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:38:42.528302Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("3d0b86be6dd716c70ec3ecf3a2d8a681765c7f9068444c639f5994c5d5d9ce5d")] }
+2026-10-24T05:38:42.528547Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:38:42.528642Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:38:42.529646Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:42.636520Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:38:43.420731Z  INFO backstitch_godot::tracing: 174: Tracing subscriber initialized
+2026-10-24T05:38:43.420746Z  INFO backstitch_godot::interop::extension: 28: ** on_level_init: Scene
+2026-10-24T05:38:43.427968Z  INFO backstitch_godot::interop::extension: 45: ** on_level_init: Editor
+2026-10-24T05:38:49.270230Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-TxeUSs"
+2026-10-24T05:38:49.270247Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-TxeUSs"
+2026-10-24T05:38:49.270259Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:38:49.273542Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:38:49.274620Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:38:49.274628Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:38:49.274709Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:38:49.274847Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:39:11.475864Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-4iIhxV"
+2026-10-24T05:39:11.475892Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-4iIhxV"
+2026-10-24T05:39:11.475946Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:39:11.479235Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:39:11.480548Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:39:11.480559Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:39:11.480639Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:39:11.480771Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:39:11.675220Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-CBejIQ"
+2026-10-24T05:39:11.675245Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-CBejIQ"
+2026-10-24T05:39:11.675262Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:39:11.678615Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:39:11.679576Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:39:11.679588Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:39:11.679665Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:39:11.679856Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:39:11.679989Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:39:11.680572Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:39:11.680599Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:39:11.683130Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:39:11.683181Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:39:11.683209Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("1278635eceba1e6e832e2dc0082e48f256f7acf18450fc9b8fdee5190c078783")] }
+2026-10-24T05:39:11.683474Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:39:11.683508Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:39:11.989317Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:41:16.688994Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-tMPZD9"
+2026-10-24T05:41:16.689012Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-tMPZD9"
+2026-10-24T05:41:16.689028Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:41:16.695677Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:41:16.696674Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:41:16.696684Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:41:16.696765Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:41:16.696928Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:41:16.882989Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-bX17z2"
+2026-10-24T05:41:16.883006Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-bX17z2"
+2026-10-24T05:41:16.883020Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:41:16.889388Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:41:16.892528Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:41:16.892540Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:41:16.892621Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:41:16.892800Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:41:16.892920Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:41:16.893531Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:41:16.893551Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:41:16.896272Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:41:16.896315Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:41:16.896339Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("6316f64ebc7637d39eee63d609ab18f64dcc86158adc2c80928119131db9d6a0")] }
+2026-10-24T05:41:16.896618Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:41:16.897362Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:41:17.200471Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:41:21.458915Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-3ZdbRZ"
+2026-10-24T05:41:21.458932Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-3ZdbRZ"
+2026-10-24T05:41:21.458946Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:41:21.461096Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:41:21.462060Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:41:21.462074Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:41:21.462152Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:41:21.462323Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:41:21.683122Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-HWF7kU"
+2026-10-24T05:41:21.683138Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-HWF7kU"
+2026-10-24T05:41:21.683151Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:41:21.685362Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:41:21.686422Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:41:21.686434Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:41:21.686517Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:41:21.686748Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:41:21.686889Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:41:21.687446Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:41:21.687469Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:41:21.689931Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:41:21.689978Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:41:21.690007Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("e47a35476fb08c64e588c67f6d4554590810359103d98e8418da6ae787cded03")] }
+2026-10-24T05:41:21.690291Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:41:21.690341Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:41:21.697725Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:41:21.796732Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:42:01.623182Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-jgKgnx"
+2026-10-24T05:42:01.623198Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-jgKgnx"
+2026-10-24T05:42:01.623210Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:42:01.623244Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:42:01.624169Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:42:01.624180Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:42:01.624259Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:42:01.624420Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:42:01.819924Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-5FCkPD"
+2026-10-24T05:42:01.819948Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-5FCkPD"
+2026-10-24T05:42:01.819963Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:42:01.822161Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:42:01.823144Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:42:01.823158Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:42:01.823241Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:42:01.823402Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:42:01.823491Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:42:01.824798Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:42:01.824821Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:42:01.827812Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:42:01.827853Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:42:01.827876Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("c3958a9a8a0f109362ffb9691be01ce688df4e24044a09f26d8755a221152864")] }
+2026-10-24T05:42:01.828160Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:42:01.828803Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:42:02.090514Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:43:06.076163Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-AvURwS"
+2026-10-24T05:43:06.076183Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-AvURwS"
+2026-10-24T05:43:06.076200Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:43:06.078374Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:43:06.079235Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:43:06.079246Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:43:06.079326Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:43:06.079497Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:43:06.275867Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-K5tiDO"
+2026-10-24T05:43:06.275886Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-K5tiDO"
+2026-10-24T05:43:06.275899Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:43:06.279592Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:43:06.280440Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:43:06.280448Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:43:06.280524Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:43:06.280682Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:43:06.280789Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:43:06.281350Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:43:06.281370Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:43:06.283993Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:43:06.284034Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:43:06.284056Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("9b532849cf8e2dc4c6dc823df3ce89e313a9372437a96a19813e795e66425e0c")] }
+2026-10-24T05:43:06.284328Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:43:06.285058Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:43:06.529592Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:43:43.155164Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-x9utiD"
+2026-10-24T05:43:43.155182Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-x9utiD"
+2026-10-24T05:43:43.155196Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:43:43.161861Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:43:43.162897Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:43:43.162911Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:43:43.162992Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:43:43.163189Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:43:43.374951Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-vE6Fsv"
+2026-10-24T05:43:43.374971Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-vE6Fsv"
+2026-10-24T05:43:43.374989Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:43:43.380471Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:43:43.382129Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:43:43.382144Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:43:43.382220Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:43:43.382446Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:43:43.382547Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:43:43.383120Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:43:43.383146Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:43:43.385834Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:43:43.385884Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:43:43.385905Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("1bd560be7ffa61cee783d3a9c3ce8f6a9b1dd39136c9b526ff9aaaa6c05ef1f7")] }
+2026-10-24T05:43:43.386159Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:43:43.386210Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:43:43.389137Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:43:43.493176Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:44:03.525076Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-s0m5iT"
+2026-10-24T05:44:03.525093Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-s0m5iT"
+2026-10-24T05:44:03.525104Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:44:03.528396Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:44:03.529410Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:44:03.529426Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:44:03.529507Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:44:03.529684Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:44:03.716463Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-Dk8mgt"
+2026-10-24T05:44:03.716483Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-Dk8mgt"
+2026-10-24T05:44:03.716503Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T05:44:03.723247Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:44:03.724298Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:44:03.724311Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:44:03.724389Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:44:03.724575Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T05:44:03.724702Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T05:44:03.725263Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T05:44:03.725283Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T05:44:03.727879Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T05:44:03.727912Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T05:44:03.727933Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("793b5cff89e5f15b2d84cd38920605ee56ab2cc1473f700cca8101e627defec1")] }
+2026-10-24T05:44:03.728178Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T05:44:03.728227Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T05:44:04.119489Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T05:44:04.817335Z  INFO backstitch_godot::tracing: 174: Tracing subscriber initialized
+2026-10-24T05:44:04.817350Z  INFO backstitch_godot::interop::extension: 28: ** on_level_init: Scene
+2026-10-24T05:44:04.821679Z  INFO backstitch_godot::interop::extension: 45: ** on_level_init: Editor
+2026-10-24T05:45:59.315611Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/project.godot-7ekfNi"
+2026-10-24T05:45:59.315643Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/project.godot-7ekfNi"
+2026-10-24T05:45:59.315665Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/project.godot"
+2026-10-24T05:45:59.320695Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:45:59.322083Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:45:59.322096Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:45:59.322214Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:45:59.322457Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T05:45:59.919616Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-vDhyWq"
+2026-10-24T05:45:59.919632Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-vDhyWq"
+2026-10-24T05:45:59.919644Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T05:45:59.925816Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T05:45:59.926766Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T05:45:59.926775Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T05:45:59.926853Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T05:45:59.926987Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:00:02.582012Z DEBUG io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 159: websocket closing
+2026-10-24T06:00:02.584150Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Disconnected { reason: "Dialer DialerId(0) connection removed" })
+2026-10-24T06:00:02.591939Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:00:02.745495Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 1 })
+2026-10-24T06:00:02.860781Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing IO error: Connection refused (os error 61)
+2026-10-24T06:00:02.860820Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:02.860847Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.149510Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 2 })
+2026-10-24T06:00:03.194889Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.194927Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.194964Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.455881Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 3 })
+2026-10-24T06:00:03.490231Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.490257Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:03.490278Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:04.268963Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 4 })
+2026-10-24T06:00:04.315300Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing IO error: Connection refused (os error 61)
+2026-10-24T06:00:04.315348Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:04.315396Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=IO error: Connection refused (os error 61)
+2026-10-24T06:00:05.794103Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 5 })
+2026-10-24T06:00:06.093183Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Connected { peer_info: PeerInfo { peer_id: PeerId("peer-11158710653728721816"), storage_id: Some(StorageId("cd21762f-5042-4ff3-adbe-9681cc1c44c2")) } })
+2026-10-24T06:00:06.172460Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:00:12.716223Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 116: Error receiving websocket message: WebSocket protocol error: Connection reset without closing handshake
+2026-10-24T06:00:12.716276Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 246: error receiving, closing connection err=Network("websocket receive error: network: error receiving websocket message: WebSocket protocol error: Connection reset without closing handshake")
+2026-10-24T06:00:12.716950Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Disconnected { reason: "Dialer DialerId(0) connection removed" })
+2026-10-24T06:00:12.725687Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:00:12.815500Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 1 })
+2026-10-24T06:00:13.055422Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.055482Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 104: HTTP error 502 Bad Gateway
+2026-10-24T06:00:13.055499Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.055531Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.219985Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 2 })
+2026-10-24T06:00:13.456451Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 97: error while dialing HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.456487Z ERROR io_loop{local_peer_id=PeerId("peer-983698142235725483")}: backstitch::project::connection::dialer: 104: HTTP error 502 Bad Gateway
+2026-10-24T06:00:13.456498Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}: samod::io_loop: 355: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.456520Z  WARN io_loop{local_peer_id=PeerId("peer-983698142235725483")}:handle_event{local_peer_id=peer-983698142235725483}: samod_core::actors::hub::state: 1179: dial failed dialer_id=DialerId(0) url=wss://alpha.backstitch.dev/sync error=HTTP error: 502 Bad Gateway
+2026-10-24T06:00:13.828998Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Reconnecting { attempt: 3 })
+2026-10-24T06:00:14.107238Z DEBUG backstitch::project::connection: 291: Dialer event: Some(Connected { peer_info: PeerInfo { peer_id: PeerId("peer-14532692165472725514"), storage_id: Some(StorageId("cd21762f-5042-4ff3-adbe-9681cc1c44c2")) } })
+2026-10-24T06:00:14.576919Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:02:43.970527Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-uZw7TT"
+2026-10-24T06:02:43.970571Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-uZw7TT"
+2026-10-24T06:02:43.970588Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:02:43.977149Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:02:43.978507Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:02:43.978520Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:02:43.978599Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:02:43.978764Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:02:44.273893Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-RWUkqT"
+2026-10-24T06:02:44.273916Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-RWUkqT"
+2026-10-24T06:02:44.273931Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:02:44.278565Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:02:44.279812Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:02:44.279825Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:02:44.279905Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:02:44.280058Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:02:44.280163Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:02:44.280872Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:02:44.280916Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:02:44.283852Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:02:44.283900Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:02:44.283919Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("6c1baa9d578c4f4acd3fecfbeac72c637c30ec54a65a6a9f4a8b79f08de0a323")] }
+2026-10-24T06:02:44.284168Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:02:44.284263Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:02:44.288213Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:02:44.392081Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:02:48.000541Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-0Nza5y"
+2026-10-24T06:02:48.000564Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-0Nza5y"
+2026-10-24T06:02:48.000576Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:02:48.006083Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:02:48.007004Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:02:48.007015Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:02:48.007092Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:02:48.007230Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:02:48.233776Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-R4EpgT"
+2026-10-24T06:02:48.233792Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-R4EpgT"
+2026-10-24T06:02:48.233809Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:02:48.239357Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:02:48.240194Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:02:48.240204Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:02:48.240295Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:02:48.240454Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:02:48.240556Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:02:48.241122Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:02:48.241139Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:02:48.243660Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:02:48.243705Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:02:48.243725Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("10191f75546fd62970dd2e5465ef8a5fea8b50620033dced005d8de8b69faee0")] }
+2026-10-24T06:02:48.243994Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:02:48.244026Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:02:48.493710Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:03:00.197274Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-IxzeTp"
+2026-10-24T06:03:00.197290Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-IxzeTp"
+2026-10-24T06:03:00.197302Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:03:00.202826Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:03:00.203765Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:03:00.203774Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:03:00.203853Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:03:00.204002Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:03:01.359024Z  INFO backstitch_godot::tracing: 174: Tracing subscriber initialized
+2026-10-24T06:03:01.359041Z  INFO backstitch_godot::interop::extension: 28: ** on_level_init: Scene
+2026-10-24T06:03:01.363437Z  INFO backstitch_godot::interop::extension: 45: ** on_level_init: Editor
+2026-10-24T06:04:57.706687Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-ckbBVA"
+2026-10-24T06:04:57.706705Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-ckbBVA"
+2026-10-24T06:04:57.706718Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:04:57.712239Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:04:57.713043Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:04:57.713055Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:04:57.713140Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:04:57.713323Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:04:57.935215Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-a74C1y"
+2026-10-24T06:04:57.935233Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-a74C1y"
+2026-10-24T06:04:57.935257Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:04:57.936336Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:04:57.937421Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:04:57.937435Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:04:57.937513Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:04:57.937704Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:04:57.937793Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:04:57.961358Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:04:57.961395Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:04:57.970984Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:04:57.971041Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:04:57.971065Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("81b3eaee8a35b089b6611489d21f0c2984bc66a029cbdf652c7dc3dfa81d0538")] }
+2026-10-24T06:04:57.971271Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:04:57.971397Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:04:57.974855Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:04:58.074183Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:05:40.221014Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-O5ecMz"
+2026-10-24T06:05:40.221031Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-O5ecMz"
+2026-10-24T06:05:40.221043Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:05:40.225463Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:05:40.226446Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:05:40.226461Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:05:40.226545Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:05:40.226746Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:05:40.445117Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-1FEVtA"
+2026-10-24T06:05:40.445136Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-1FEVtA"
+2026-10-24T06:05:40.445150Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:05:40.449668Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:05:40.450550Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:05:40.450575Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:05:40.450656Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:05:40.450822Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:05:40.450931Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:05:40.452135Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:05:40.452154Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:05:40.455442Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:05:40.455488Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:05:40.455512Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("85aea520db06427aeaf2444a400f2d3ba99282d603a0950d1993be97daeacc7b")] }
+2026-10-24T06:05:40.455758Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:05:40.455827Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:05:40.457035Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:05:40.562188Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:05:57.492594Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-EuakIs"
+2026-10-24T06:05:57.492611Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-EuakIs"
+2026-10-24T06:05:57.499340Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 2 watched changes, attempting to commit...
+2026-10-24T06:05:57.500287Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:05:57.500301Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:05:57.500380Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:05:57.500555Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:05:57.519976Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:05:57.526695Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 1 watched changes, attempting to commit...
+2026-10-24T06:05:57.527616Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:05:57.527625Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:05:57.527706Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:05:57.527888Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:05:57.715404Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-KhbdfU"
+2026-10-24T06:05:57.715428Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-KhbdfU"
+2026-10-24T06:05:57.715446Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:05:57.716514Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:05:57.717392Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:05:57.717404Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:05:57.717484Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:05:57.717635Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:05:57.717758Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:05:57.718391Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:05:57.718411Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:05:57.721288Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:05:57.721332Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:05:57.721353Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("7ee21c0a583a1b4a85e9fee1abcb097c69ffede8142788783f28901eb5afeb62")] }
+2026-10-24T06:05:57.721609Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:05:57.721671Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:05:57.975527Z  INFO backstitch::project::project_base: 91: Ingesting changes...
+2026-10-24T06:06:09.311984Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-iOQE1i"
+2026-10-24T06:06:09.312000Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn-iOQE1i"
+2026-10-24T06:06:09.312013Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scenes/beetle.tscn"
+2026-10-24T06:06:09.312046Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:06:09.313044Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:06:09.313062Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:06:09.313142Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:06:09.313319Z  INFO backstitch::project::fs::sync_fs_to_automerge: 156: Did not commit anything because there's no diff.
+2026-10-24T06:06:09.532829Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-TIDlhh"
+2026-10-24T06:06:09.532850Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd-TIDlhh"
+2026-10-24T06:06:09.532876Z DEBUG backstitch::project::fs::fs_watcher: 34: handling filesystem event: "/Users/stan/getting-things-dung/Scripts/beetle.gd"
+2026-10-24T06:06:09.537054Z  INFO backstitch::project::fs::sync_fs_to_automerge: 112: There are 3 watched changes, attempting to commit...
+2026-10-24T06:06:09.538059Z DEBUG backstitch::project::branch_db::file: 91: Multiple heads found res://project.godot
+2026-10-24T06:06:09.538071Z DEBUG backstitch::project::branch_db::file: 103: Using slow hash for res://project.godot
+2026-10-24T06:06:09.538150Z DEBUG backstitch::project::branch_db::file: 106: Done logging res://project.godot
+2026-10-24T06:06:09.538363Z DEBUG backstitch::project::fs::sync_fs_to_automerge: 161: Current changes: {"/Users/stan/getting-things-dung/Scripts/beetle.gd": Modified}
+2026-10-24T06:06:09.538449Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 150: Attempting to commit 1 changes...
+2026-10-24T06:06:09.539076Z DEBUG commit_fs_changes: backstitch::project::branch_db::commit: 269: Attempting reconcile...
+2026-10-24T06:06:09.539107Z DEBUG backstitch::project::branch_db::branch_sync: 283: Reconcile starting...
+2026-10-24T06:06:09.542041Z DEBUG backstitch::project::branch_db::branch_sync: 319: Reconcile completed.
+2026-10-24T06:06:09.542105Z  INFO commit_fs_changes: backstitch::project::branch_db::commit: 275: Committed 1 files.
+2026-10-24T06:06:09.542138Z  INFO backstitch::project::fs::sync_fs_to_automerge: 173: Successfully made a commit! HistoryRef { branch: 4G7F2Fn6LybC6br65gCTMhyFaHDX, heads: [ChangeHash("c5010a3fcd7a527b32acbe8a572ecbc2ae650e48058243be5bb5ac66c6a752b4")] }
+2026-10-24T06:06:09.542367Z DEBUG backstitch::project::branch_db::branch_sync: 202: Updating branch sync state...
+2026-10-24T06:06:09.542454Z DEBUG backstitch::project::branch_db::branch_sync: 278: Could not reconcile because we're already up-to-date.
+2026-10-24T06:06:09.840029Z  INFO backstitch::project::project_base: 91: Ingesting changes...
