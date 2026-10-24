@@ -26,12 +26,16 @@ const FEET_OFFSET: float = 15.0
 @export var min_jump_v: float = -180.0
 @export var max_charge_time: float = 0.9
 
+@export_group("Ball Boosts")
+@export var min_ball_boost: float = 300.0
+@export var max_ball_boost: float = 650.0
 
 #---------------------------------------------------->
 # Variables
 #---------------------------------------------------->
 var charge_time: float = 0.0
 var charging: bool = false
+var ball_in_contact: RigidBody2D = null
 
 #---------------------------------------------------->
 # Functions
@@ -79,13 +83,29 @@ func _handle_jump(delta: float) -> void:
 		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
 	# Release Jump
 	elif Input.is_action_just_released("up"):
-		sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
+		if is_instance_valid(ball_in_contact) and global_position.distance_to(ball_in_contact.global_position) < 60.0:
+			velocity = Vector2.ZERO
+			
+			# Jump calculations
+			var launch_x: float = sign(ball_in_contact.global_position.x - global_position.x)
+			if launch_x == 0:
+				launch_x = 1.0
+			var launch_dir: Vector2 = Vector2(launch_x, -1.0).normalized()
+			
+			# Apply the jump
+			var boost_impulse: float = lerp(min_ball_boost, max_ball_boost, charge_time / max_charge_time)
+			ball_in_contact.apply_central_impulse(launch_dir * boost_impulse)
+			
+			# Recoil animations
+			sprite_squash = Vector2(1.25, 0.75)
+			ball_in_contact = null
+		else:
+			# Regular jumping
+			velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
+			sprite_squash = Vector2(0.7, 1.35)
+		
 		charge_time = 0.0
 		charging = false
-		
-		# Stretch animation on launch
-		sprite_squash = Vector2(0.7, 1.35)
 
 #---------------------------------------------------->
 # Horizontal Movement
@@ -129,14 +149,17 @@ func _handle_squash_animation(delta: float) -> void:
 func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
 	var pushed_ball: bool = false
 	
+	if not charging:
+		ball_in_contact = null
+	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
 		if col.get_collider() is RigidBody2D:
+			var rb = col.get_collider() as RigidBody2D
+			
 			var normal = col.get_normal()
 			if abs(normal.x) > 0.3 and normal.y > -0.7:
-				var rb = col.get_collider() as RigidBody2D
-				
-				# Push along the floor tangent instead of flat horiz
+				ball_in_contact = rb
 				var push_dir: Vector2
 				if is_on_floor():
 					var floor_norm = get_floor_normal()

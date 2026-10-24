@@ -1,41 +1,81 @@
-[gd_scene format=3 uid="uid://ci58w1ohgxhip"]
+[gd_scene format=4 uid="uid://ci58w1ohgxhip"]
 
 [ext_resource type="PackedScene" uid="uid://dm6jrtb4jl7yd" path="res://Scenes/beetle.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://dj36ql68134i2" path="res://Scenes/dung_ball.tscn" id="2_qxrlw"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_wowpa"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_i6g32"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_1l0tm"]
+[ext_resource type="Texture2D" uid="uid://brgtimopl38sa" path="res://Assets/spritesheet.png" id="6_i6g32"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_soorf"]
-size = Vector2(1152, 337)
+[sub_resource type="Resource" id="Resource_v158k"]
+script = ExtResource("5_1l0tm")
 
-[sub_resource type="Gradient" id="Gradient_ebmjs"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i6g32"]
+texture = ExtResource("6_i6g32")
+texture_region_size = Vector2i(64, 30)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 32, -15, 32, 15, -32, 15)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -15, 12.092041, -15, 32, -5.769231, 32, 15, -32, 15)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_soorf"]
-gradient = SubResource("Gradient_ebmjs")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1l0tm"]
+texture = ExtResource("6_i6g32")
+margins = Vector2i(0, 18)
+texture_region_size = Vector2i(64, 30)
+0:0/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -8.076923, 12.3076935, 15, -32, 15)
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ee3mo"]
-points = PackedVector2Array(152, 128, 0, 128, -136, 128, 0, 40)
+[sub_resource type="TileSet" id="TileSet_soorf"]
+tile_size = Vector2i(64, 30)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_i6g32")
+sources/2 = SubResource("TileSetAtlasSource_1l0tm")
 
 [node name="game" type="Node2D" unique_id=139282020]
 
 [node name="Beetle" parent="." unique_id=633333318 instance=ExtResource("1_ebmjs")]
 position = Vector2(130, 276)
 
-[node name="GroundTemporary" type="StaticBody2D" parent="." unique_id=869006847]
-position = Vector2(0, 322)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTemporary" unique_id=1945404413]
-position = Vector2(577, 169.5)
-shape = SubResource("RectangleShape2D_soorf")
-
-[node name="TextureRect" type="TextureRect" parent="GroundTemporary" unique_id=1774339560]
-offset_right = 1152.0
-offset_bottom = 337.0
-texture = SubResource("GradientTexture1D_soorf")
-
-[node name="GroundTemporary2" type="StaticBody2D" parent="." unique_id=349189064]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTemporary2" unique_id=1822496769]
-position = Vector2(312, 200)
-shape = SubResource("ConvexPolygonShape2D_ee3mo")
-
 [node name="DungBall" parent="." unique_id=1694008017 instance=ExtResource("2_qxrlw")]
-position = Vector2(349, 99)
+position = Vector2(312, 288)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=396689853]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1324879391]
+position = Vector2(-72, -6)
+polygon = PackedVector2Array(584, 336, 680, 296, 696, 256, 704, 200, 696, 160, 680, 128, 744, 128, 744, 336)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1522580430]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(221, 282)
+zoom = Vector2(3, 3)
+process_callback = 0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=493583646]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_wowpa")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=560058755 node_paths=PackedStringArray("follow_targets")]
+top_level = true
+position = Vector2(221, 282)
+script = ExtResource("4_i6g32")
+follow_mode = 3
+follow_targets = [NodePath("../Beetle"), NodePath("../DungBall")]
+zoom = Vector2(3, 3)
+tween_resource = SubResource("Resource_v158k")
+tween_on_load = false
+follow_damping = true
+follow_damping_value = Vector2(0.5, 0.5)
+auto_zoom = true
+auto_zoom_min = 1.5
+auto_zoom_max = 3.0
+auto_zoom_margin = Vector4(80, 80, 80, 80)
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1022606205]
+tile_map_data = PackedByteArray("AAABAAoAAgADAAAAAAABAAsAAQACAAAAAAABAAwAAQABAAAAAAAAAAwAAQABAAAAAAAAAAsAAQABAAAAAAACAAwAAQABAAAAAAACAA0AAQABAAAAAAADAAwAAQABAAAAAAADAA0AAQABAAAAAAABAA0AAQABAAAAAAAAAA0AAQABAAAAAAAEAAwAAQABAAAAAAAFAAwAAQABAAAAAAAGAAwAAQABAAAAAAAHAAwAAQACAAAAABAIAAwAAQABAAAAAAAJAAwAAQABAAAAAAAKAAwAAQABAAAAAAALAAwAAQABAAAAAAALAA0AAQABAAAAAAAKAA0AAQABAAAAAAAJAA0AAQABAAAAAAAIAA0AAQABAAAAAAAHAA0AAQABAAAAAAAGAA0AAQABAAAAAAAFAA0AAQABAAAAAAAEAA0AAQABAAAAAAAHAAsAAgADAAAAABAIAAsAAQACAAAAABAJAAsAAQABAAAAAAAKAAsAAQABAAAAAAAKAAoAAQABAAAAAAAKAAkAAQABAAAAAAAKAAgAAQABAAAAAAAKAAYAAQABAAAAAAAKAAcAAQABAAAAAAAKAAQAAQABAAAAAAAKAAUAAQABAAAAAAAIAAoAAgADAAAAABAJAAoAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_soorf")
