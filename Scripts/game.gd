@@ -257,7 +257,8 @@ func skip_current_narration() -> void:
 	else:
 		if is_instance_valid(voice_player):
 			voice_player.stop()
-		subtitle_label.text = ""
+		if is_instance_valid(subtitle_label):
+			subtitle_label.text = ""
 		current_captions = []
 		if is_instance_valid(skip_label):
 			skip_label.visible = false

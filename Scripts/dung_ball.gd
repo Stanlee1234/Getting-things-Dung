@@ -85,7 +85,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	# Stable platform: when beetle stands on top of the ball, freeze ball so it doesn't roll or slide
 	if is_player_standing_on():
 		var b_radius: float = col_shape.shape.radius if (is_instance_valid(col_shape) and col_shape.shape is CircleShape2D) else BASE_RADIUS
-		var space_state = PhysicsServer2D.space_get_direct_state(state.get_space())
+		var space_state = get_world_2d().direct_space_state
 		var b_pos: Vector2 = state.transform.origin
 		
 		var ray_down = PhysicsRayQueryParameters2D.create(b_pos, b_pos + Vector2(0, b_radius + 8.0), 1)

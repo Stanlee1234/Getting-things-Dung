@@ -297,7 +297,7 @@ func _handle_jump(delta: float) -> void:
 		var charge_pct: float = charge_time / max_charge_time
 		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
 	# Release Jump
-	elif Input.is_action_just_released("up"):
+	elif Input.is_action_just_released("up") or charging:
 		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
@@ -426,8 +426,8 @@ func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
 			if abs(normal.x) > 0.4 and normal.y > -0.3:
 				ball_in_contact = rb
 				var push_dir: Vector2
-				if is_on_floor():
-					var floor_norm = get_floor_normal()
+				var floor_norm = get_floor_normal()
+				if is_on_floor() and floor_norm.length_squared() > 0.5:
 					push_dir = Vector2(-floor_norm.y, floor_norm.x) * sign(direction)
 					if push_dir.dot(Vector2(direction, 0)) < 0:
 						push_dir = -push_dir
