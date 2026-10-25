@@ -27,6 +27,7 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_7ksyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=855382782]
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_7ksyx")
 
 [node name="LandParticles" type="CPUParticles2D" parent="." unique_id=1597474268]

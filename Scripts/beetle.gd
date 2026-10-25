@@ -16,6 +16,7 @@ const FEET_OFFSET: float = 15.0
 @onready var pcam_ball: PhantomCamera2D = get_parent().get_node_or_null("PcamBall")
 @onready var ball: RigidBody2D = get_parent().get_node_or_null("DungBall")
 var trauma: float = 0.0
+var input_enabled: bool = true
 
 # Ball Kicking
 @onready var kick_particles: CPUParticles2D = $KickParticles
@@ -39,6 +40,7 @@ var trauma: float = 0.0
 @export_group("Ball Boosts")
 @export var min_ball_boost: float = 300.0
 @export var max_ball_boost: float = 650.0
+@export var boost_leniency: float = 8.0
 
 @export_group("Camera Tracking")
 @export var detach_distance: float = 380.0
@@ -65,6 +67,12 @@ func _physics_process(delta: float) -> void:
 	var on_ball: bool = is_on_floor() and get_last_slide_collision() and get_last_slide_collision().get_collider() is RigidBody2D
 	var current_friction: float = ball_friction if on_ball else friction
 	
+	if not input_enabled:
+		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+		velocity.y += gravity * delta
+		move_and_slide()
+		return
+	
 	# Camera noise decay
 	if trauma > 0.0:
 		trauma = max(0.0, trauma - delta * 3.0)
@@ -89,6 +97,7 @@ func _physics_process(delta: float) -> void:
 	_handle_movement(direction, current_friction, delta)
 	_handle_squash_animation(delta)
 	_handle_walk_waddle(delta)
+	_handle_sprite_facing(direction)
 	
 	# Motion & Ball Pushing
 	var pre_vel_x: float = velocity.x
@@ -119,6 +128,58 @@ func _handle_camera_tracking() -> void:
 			pcam_group.priority = 15  # Re-attaches to frame both
 
 #---------------------------------------------------->
+# Ball Interaction & Detection Helpers
+#---------------------------------------------------->
+func is_on_top_of_ball(target_ball: RigidBody2D) -> bool:
+	if not is_instance_valid(target_ball):
+		return false
+	var dx: float = abs(global_position.x - target_ball.global_position.x)
+	var is_above: bool = global_position.y < target_ball.global_position.y - 10.0
+	if dx < 28.0 and is_above:
+		return true
+	for i in get_slide_collision_count():
+		var col = get_slide_collision(i)
+		if col.get_collider() == target_ball and col.get_normal().y < -0.5:
+			return true
+	return false
+
+func is_in_zone(target_ball: RigidBody2D) -> bool:
+	if not is_instance_valid(target_ball):
+		return false
+	if is_on_top_of_ball(target_ball):
+		return false
+	
+	var b_radius: float = 29.0
+	var b_col = target_ball.get_node_or_null("CollisionShape2D")
+	if is_instance_valid(b_col) and b_col.shape is CircleShape2D:
+		b_radius = b_col.shape.radius
+	
+	var closest_pt = Vector2(
+		clamp(target_ball.global_position.x, global_position.x - 10.0, global_position.x + 10.0),
+		clamp(target_ball.global_position.y, global_position.y - 15.0, global_position.y + 15.0)
+	)
+	var surface_gap: float = closest_pt.distance_to(target_ball.global_position) - b_radius
+	
+	var space_state = get_world_2d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters2D.create(global_position, target_ball.global_position, 1)
+	var terrain_blocking = not space_state.intersect_ray(ray_query).is_empty()
+	
+	return (surface_gap <= boost_leniency or ball_in_contact == target_ball) and not terrain_blocking
+
+func _handle_sprite_facing(direction: float) -> void:
+	var target_ball: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
+	var in_zone: bool = is_in_zone(target_ball)
+	
+	if in_zone:
+		# Dung beetle in real life: flips upside down on its head, back legs against the ball
+		sprite.flip_v = true
+		sprite.flip_h = target_ball.global_position.x > global_position.x
+	else:
+		sprite.flip_v = false
+		if direction != 0.0:
+			sprite.flip_h = direction < 0.0
+
+#---------------------------------------------------->
 # Jump + Gravity Logic
 #---------------------------------------------------->
 func _handle_jump(delta: float) -> void:
@@ -137,28 +198,7 @@ func _handle_jump(delta: float) -> void:
 	# Release Jump
 	elif Input.is_action_just_released("up"):
 		var target_ball: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
-		var can_boost: bool = false
-		if is_instance_valid(target_ball):
-			var b_radius: float = 31.0
-			var b_col = target_ball.get_node_or_null("CollisionShape2D")
-			if is_instance_valid(b_col) and b_col.shape is CircleShape2D:
-				b_radius = b_col.shape.radius
-			
-			# Closest point on the beetle's collision box (width 20, height 30)
-			var closest_pt = Vector2(
-				clamp(target_ball.global_position.x, global_position.x - 10.0, global_position.x + 10.0),
-				clamp(target_ball.global_position.y, global_position.y - 15.0, global_position.y + 15.0)
-			)
-			var surface_gap: float = closest_pt.distance_to(target_ball.global_position) - b_radius
-			
-			# Check direct line of sight (ensure no terrain wall/ledge between beetle and ball)
-			var space_state = get_world_2d().direct_space_state
-			var ray_query = PhysicsRayQueryParameters2D.create(global_position, target_ball.global_position, 1)
-			var terrain_blocking = not space_state.intersect_ray(ray_query).is_empty()
-			
-			# Leniency: allow kicking within 18.0 pixels of the ball, provided no terrain blocks line of sight
-			if surface_gap <= 18.0 and not terrain_blocking:
-				can_boost = true
+		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
 			velocity = Vector2.ZERO
@@ -167,16 +207,7 @@ func _handle_jump(delta: float) -> void:
 			var launch_x: float = sign(target_ball.global_position.x - global_position.x)
 			if launch_x == 0:
 				launch_x = 1.0
-			var launch_dir: Vector2
-			if is_on_floor():
-				var floor_norm: Vector2 = get_floor_normal()
-				var floor_tangent: Vector2 = Vector2(-floor_norm.y, floor_norm.x) * launch_x
-				if floor_tangent.dot(Vector2(launch_x, 0)) < 0:
-					floor_tangent = -floor_tangent
-				# Always 45° relative to the floor surface
-				launch_dir = (floor_tangent + floor_norm).normalized()
-			else:
-				launch_dir = Vector2(launch_x, -1.0).normalized()
+			var launch_dir: Vector2 = Vector2(launch_x, -1.0).normalized()
 			
 			# Apply the jump
 			var boost_impulse: float = lerp(min_ball_boost, max_ball_boost, charge_time / max_charge_time)
@@ -274,6 +305,10 @@ func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
 	
 	if not charging:
 		ball_in_contact = null
+	
+	# Cannot push the ball while on top of it
+	if is_on_top_of_ball(ball):
+		return
 	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
