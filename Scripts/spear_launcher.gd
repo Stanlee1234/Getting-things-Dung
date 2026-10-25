@@ -133,6 +133,9 @@ func _check_and_launch_bodies() -> void:
 		_launch_body(body)
 
 func _launch_body(body: Node) -> void:
+	if is_instance_valid(sfx_player):
+		sfx_player.pitch_scale = randf_range(0.95, 1.05)
+		sfx_player.play()
 	if body is RigidBody2D:
 		body.linear_velocity = launch_velocity
 		body.angular_velocity = randf_range(-6.0, 6.0)

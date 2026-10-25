@@ -6,6 +6,10 @@ extends Control
 @onready var play_button: Button = $UI/VBoxContainer/PlayButton
 @onready var quit_button: Button = $UI/VBoxContainer/QuitButton
 
+const SFX_LAND = preload("res://Assets/sfx/land.tres")
+const SFX_JUMP = preload("res://Assets/sfx/jump.tres")
+var sfx_player: AudioStreamPlayer
+
 # Screen boundary colliders
 @onready var wall_left: CollisionShape2D = $Walls/Left/CollisionShape2D
 @onready var wall_right: CollisionShape2D = $Walls/Right/CollisionShape2D
@@ -18,6 +22,9 @@ var max_speed: float = 620.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	sfx_player = AudioStreamPlayer.new()
+	sfx_player.name = "StartSfxPlayer"
+	add_child(sfx_player)
 	_update_walls()
 	get_viewport().size_changed.connect(_update_walls)
 	
@@ -90,6 +97,11 @@ func _on_ball_collided(_body: Node) -> void:
 	_play_bounce_feedback()
 
 func _play_bounce_feedback() -> void:
+	if is_instance_valid(sfx_player):
+		sfx_player.stream = SFX_LAND
+		sfx_player.volume_db = -6.0
+		sfx_player.pitch_scale = randf_range(0.9, 1.2)
+		sfx_player.play()
 	if is_instance_valid(bounce_particles):
 		bounce_particles.restart()
 		bounce_particles.emitting = true
@@ -100,6 +112,10 @@ func _play_bounce_feedback() -> void:
 		tween.tween_property(ball_sprite, "scale", base_ball_scale, 0.12)
 
 func _on_play_pressed() -> void:
+	if is_instance_valid(sfx_player):
+		sfx_player.stream = SFX_JUMP
+		sfx_player.volume_db = 0.0
+		sfx_player.play()
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 func _on_quit_pressed() -> void:
