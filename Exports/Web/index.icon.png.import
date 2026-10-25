@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlef8wgxfg14g"
-path="res://.godot/imported/ice6.png-7caefe89163b00a5a660ef82e218984d.ctex"
+uid="uid://ceevg5gj2fojw"
+path="res://.godot/imported/index.icon.png-20777639825951eeb5746939fb2bec26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ice6.png"
-dest_files=["res://.godot/imported/ice6.png-7caefe89163b00a5a660ef82e218984d.ctex"]
+source_file="res://Exports/Web/index.icon.png"
+dest_files=["res://.godot/imported/index.icon.png-20777639825951eeb5746939fb2bec26.ctex"]
 
 [params]
 
@@ -36,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=64
+process/size_limit=0
 detect_3d/compress_to=1

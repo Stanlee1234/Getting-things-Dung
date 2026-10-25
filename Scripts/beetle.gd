@@ -3,12 +3,25 @@ extends CharacterBody2D
 #---------------------------------------------------->
 # Import Variables
 #---------------------------------------------------->
-@onready var sprite = $Sprite2D
-#Squishing animation variables
-@onready var base_scale: Vector2 = sprite.scale
+@onready var sprite_regular: Sprite2D = $BeetleRegular
+@onready var sprite_handstand: Sprite2D = $BeetleHandstand
+@onready var regular_hitbox: CollisionShape2D = $RegularHitbox
+@onready var handstand_hitbox: CollisionShape2D = $HandstandHitbox
+
+@onready var sprite: Sprite2D = $BeetleRegular
+@onready var base_scale_regular: Vector2 = $BeetleRegular.scale
+@onready var base_scale_handstand: Vector2 = $BeetleHandstand.scale
+@onready var base_pos_regular: Vector2 = $BeetleRegular.position
+@onready var base_pos_handstand: Vector2 = $BeetleHandstand.position
+@onready var handstand_hitbox_base_pos: Vector2 = $HandstandHitbox.position
+
+var is_handstand: bool = false
+var handstand_timer: float = 0.0
+
+# Squishing animation variables
 var sprite_squash: Vector2 = Vector2.ONE
 var was_on_floor_last_frame: bool = true
-const FEET_OFFSET: float = 15.0
+const FEET_OFFSET: float = 14.0
 
 # Phantom Camera Shenanigans lol
 @onready var pcam_group: PhantomCamera2D = get_parent().get_node_or_null("PcamGroup")
@@ -61,13 +74,61 @@ var walk_cycle: float = 0.0
 func _ready() -> void:
 	floor_snap_length = 16.0
 	floor_constant_speed = true
+	_set_handstand_mode(false)
+
+func _set_handstand_mode(active: bool) -> void:
+	if is_handstand == active:
+		return
+	is_handstand = active
+	
+	if is_handstand:
+		sprite_regular.visible = false
+		sprite_regular.rotation = 0.0
+		sprite_regular.offset = Vector2.ZERO
+		sprite_regular.position = base_pos_regular
+		sprite_regular.scale = base_scale_regular
+		
+		sprite_handstand.visible = true
+		sprite_handstand.rotation = 0.0
+		sprite_handstand.offset = Vector2.ZERO
+		sprite_handstand.position = base_pos_handstand
+		sprite_handstand.scale = base_scale_handstand
+		
+		regular_hitbox.disabled = true
+		handstand_hitbox.disabled = false
+		sprite = sprite_handstand
+	else:
+		sprite_handstand.visible = false
+		sprite_handstand.rotation = 0.0
+		sprite_handstand.offset = Vector2.ZERO
+		sprite_handstand.position = base_pos_handstand
+		sprite_handstand.scale = base_scale_handstand
+		
+		sprite_regular.visible = true
+		sprite_regular.rotation = 0.0
+		sprite_regular.offset = Vector2.ZERO
+		sprite_regular.position = base_pos_regular
+		sprite_regular.scale = base_scale_regular
+		
+		regular_hitbox.disabled = false
+		handstand_hitbox.disabled = true
+		sprite = sprite_regular
 
 func _physics_process(delta: float) -> void:
+	if handstand_timer > 0.0:
+		handstand_timer = max(0.0, handstand_timer - delta)
+		
 	var direction: float = Input.get_axis("left", "right")
 	var on_ball: bool = is_on_floor() and get_last_slide_collision() and get_last_slide_collision().get_collider() is RigidBody2D
 	var current_friction: float = ball_friction if on_ball else friction
 	
 	if not input_enabled:
+		if charging:
+			charging = false
+			charge_time = 0.0
+			var tb: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
+			if is_instance_valid(tb) and tb.has_method("set_held"):
+				tb.set_held(false)
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 		velocity.y += gravity * delta
 		move_and_slide()
@@ -95,9 +156,9 @@ func _physics_process(delta: float) -> void:
 		direction = 0.0
 		
 	_handle_movement(direction, current_friction, delta)
+	_handle_sprite_facing(direction)
 	_handle_squash_animation(delta)
 	_handle_walk_waddle(delta)
-	_handle_sprite_facing(direction)
 	
 	# Motion & Ball Pushing
 	var pre_vel_x: float = velocity.x
@@ -145,8 +206,16 @@ func is_on_top_of_ball(target_ball: RigidBody2D) -> bool:
 
 func is_in_zone(target_ball: RigidBody2D) -> bool:
 	if not is_instance_valid(target_ball):
+		handstand_timer = 0.0
 		return false
 	if is_on_top_of_ball(target_ball):
+		handstand_timer = 0.0
+		return false
+	
+	var space_state = get_world_2d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters2D.create(global_position, target_ball.global_position, 1)
+	if not space_state.intersect_ray(ray_query).is_empty():
+		handstand_timer = 0.0
 		return false
 	
 	var b_radius: float = 29.0
@@ -155,49 +224,76 @@ func is_in_zone(target_ball: RigidBody2D) -> bool:
 		b_radius = b_col.shape.radius
 	
 	var closest_pt = Vector2(
-		clamp(target_ball.global_position.x, global_position.x - 10.0, global_position.x + 10.0),
+		clamp(target_ball.global_position.x, global_position.x - 22.0, global_position.x + 22.0),
 		clamp(target_ball.global_position.y, global_position.y - 15.0, global_position.y + 15.0)
 	)
 	var surface_gap: float = closest_pt.distance_to(target_ball.global_position) - b_radius
+	var is_touching: bool = (ball_in_contact == target_ball)
 	
-	var space_state = get_world_2d().direct_space_state
-	var ray_query = PhysicsRayQueryParameters2D.create(global_position, target_ball.global_position, 1)
-	var terrain_blocking = not space_state.intersect_ray(ray_query).is_empty()
+	var enter_threshold: float = boost_leniency * 1.5 if charging else boost_leniency
+	var exit_threshold: float = boost_leniency * 1.5 if charging else boost_leniency
 	
-	return (surface_gap <= boost_leniency or ball_in_contact == target_ball) and not terrain_blocking
+	if is_handstand:
+		if charging or is_touching or surface_gap <= exit_threshold or handstand_timer > 0.0:
+			if is_touching or surface_gap <= enter_threshold:
+				handstand_timer = 0.2
+			return true
+		return false
+	else:
+		if is_touching or surface_gap <= enter_threshold:
+			handstand_timer = 0.2
+			return true
+		return false
 
 func _handle_sprite_facing(direction: float) -> void:
 	var target_ball: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
 	var in_zone: bool = is_in_zone(target_ball)
 	
 	if in_zone:
-		# Dung beetle in real life: flips upside down on its head, back legs against the ball
-		sprite.flip_v = true
-		sprite.flip_h = target_ball.global_position.x > global_position.x
+		_set_handstand_mode(true)
+		var ball_is_to_right: bool = target_ball.global_position.x > global_position.x
+		sprite_handstand.flip_h = ball_is_to_right
+		sprite_handstand.position.x = -base_pos_handstand.x if ball_is_to_right else base_pos_handstand.x
+		handstand_hitbox.position.x = -handstand_hitbox_base_pos.x if ball_is_to_right else handstand_hitbox_base_pos.x
+		handstand_hitbox.position.y = handstand_hitbox_base_pos.y
 	else:
-		sprite.flip_v = false
+		_set_handstand_mode(false)
 		if direction != 0.0:
-			sprite.flip_h = direction < 0.0
+			var facing_left: bool = (direction < 0.0)
+			sprite_regular.flip_h = facing_left
 
 #---------------------------------------------------->
 # Jump + Gravity Logic
 #---------------------------------------------------->
 func _handle_jump(delta: float) -> void:
+	var target_ball: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
+
 	# Fall / Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		charge_time = 0.0
+		if charging:
+			charging = false
+			if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+				target_ball.set_held(false)
 	# Charge Jump
 	elif Input.is_action_pressed("up"):
 		charge_time = min(charge_time + delta, max_charge_time)
 		charging = true
+		
+		# The ball should only stop on boosts, not regular jumps
+		var is_boosting: bool = is_in_zone(target_ball) or is_handstand
+		if is_boosting and is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+			target_ball.set_held(true)
 		
 		# Squish animation while charging
 		var charge_pct: float = charge_time / max_charge_time
 		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
 	# Release Jump
 	elif Input.is_action_just_released("up"):
-		var target_ball: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
+		if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+			target_ball.set_held(false)
+			
 		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
@@ -229,6 +325,7 @@ func _handle_jump(delta: float) -> void:
 			# Recoil animations
 			sprite_squash = Vector2(1.25, 0.75)
 			ball_in_contact = null
+			handstand_timer = 0.0
 		else:
 			# Regular jumping
 			velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
@@ -279,9 +376,13 @@ func _handle_squash_animation(delta: float) -> void:
 	else:
 		sprite.offset = Vector2.ZERO
 	
-	# Apply scale & keep feet planted on floor
-	sprite.scale = base_scale * sprite_squash
-	sprite.position.y = FEET_OFFSET * (1.0 - sprite_squash.y)
+	# Apply scale & keep feet planted on floor relative to base position
+	var current_base_scale: Vector2 = base_scale_handstand if is_handstand else base_scale_regular
+	var current_base_pos: Vector2 = base_pos_handstand if is_handstand else base_pos_regular
+	var current_feet_offset: float = 18.0 if is_handstand else FEET_OFFSET
+	
+	sprite.scale = current_base_scale * sprite_squash
+	sprite.position.y = current_base_pos.y + current_feet_offset * (1.0 - sprite_squash.y)
 
 #---------------------------------------------------->
 # Walking Tilt / Waddle Animation
@@ -301,6 +402,8 @@ func _handle_walk_waddle(delta: float) -> void:
 # Ball Push Handling
 #---------------------------------------------------->
 func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
+	if charging:
+		return
 	var pushed_ball: bool = false
 	
 	if not charging:

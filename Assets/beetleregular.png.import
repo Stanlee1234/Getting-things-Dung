@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brgtimopl38sa"
-path="res://.godot/imported/spritesheet.png-7eb74f42a71eaac58a7cbe0bb302bcda.ctex"
+uid="uid://2d4dspdvgb6h"
+path="res://.godot/imported/beetleregular.png-e789bb40b650d455507790856cfb7bd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/spritesheet.png"
-dest_files=["res://.godot/imported/spritesheet.png-7eb74f42a71eaac58a7cbe0bb302bcda.ctex"]
+source_file="res://Assets/beetleregular.png"
+dest_files=["res://.godot/imported/beetleregular.png-e789bb40b650d455507790856cfb7bd7.ctex"]
 
 [params]
 
@@ -36,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=320
+process/size_limit=0
 detect_3d/compress_to=1

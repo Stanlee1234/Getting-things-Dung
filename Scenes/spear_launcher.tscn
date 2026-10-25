@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://g7rpys5iwrqp"]
+
+[ext_resource type="Script" uid="uid://sbeyuckeer8q" path="res://Scripts/spear_launcher.gd" id="1_spear"]
+[ext_resource type="Texture2D" uid="uid://cjdmicweb460u" path="res://Assets/worm.png" id="2_hjev8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trig"]
+size = Vector2(36, 24)
+
+[node name="SpearLauncher" type="Node2D" unique_id=1118376069]
+script = ExtResource("1_spear")
+launch_velocity = Vector2(75, -800)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1492641162]
+position = Vector2(-4.7683716e-07, 27.999992)
+scale = Vector2(0.21195647, 0.21195649)
+texture = ExtResource("2_hjev8")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1924356430]
+position = Vector2(0, -12)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=819682471]
+shape = SubResource("RectangleShape2D_trig")

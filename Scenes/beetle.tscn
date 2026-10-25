@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://dm6jrtb4jl7yd"]
 
-[ext_resource type="Texture2D" uid="uid://ddxmxgyyfy8mn" path="res://icon.svg" id="1_i667w"]
 [ext_resource type="Script" uid="uid://c14rwt6nttrbo" path="res://Scripts/beetle.gd" id="1_u0t3v"]
+[ext_resource type="Texture2D" uid="uid://cqmusc23e18fy" path="res://Assets/beetlestand.png" id="2_u0t3v"]
+[ext_resource type="Texture2D" uid="uid://2d4dspdvgb6h" path="res://Assets/beetleregular.png" id="2_yet8e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0t3v"]
+size = Vector2(44, 24.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ksyx"]
-size = Vector2(20, 30)
+size = Vector2(25.5, 38)
 
 [node name="Beetle" type="CharacterBody2D" unique_id=633333318]
 collision_mask = 3
@@ -12,14 +16,6 @@ platform_on_leave = 2
 platform_floor_layers = 4294967293
 script = ExtResource("1_u0t3v")
 push_force = 7.0
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=204912367]
-position = Vector2(-7.1525574e-07, -4.7683716e-07)
-scale = Vector2(0.15624999, 0.234375)
-texture = ExtResource("1_i667w")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1193994825]
-shape = SubResource("RectangleShape2D_7ksyx")
 
 [node name="KickParticles" type="CPUParticles2D" parent="." unique_id=1281710480]
 z_index = 2
@@ -39,3 +35,23 @@ damping_max = 65.0
 scale_amount_min = 2.0
 scale_amount_max = 4.5
 color = Color(0.85, 0.85, 0.82, 1)
+
+[node name="BeetleRegular" type="Sprite2D" parent="." unique_id=621120145]
+scale = Vector2(-0.15, 0.15)
+texture = ExtResource("2_yet8e")
+
+[node name="BeetleHandstand" type="Sprite2D" parent="." unique_id=1040786353]
+visible = false
+position = Vector2(-1.5249996, -6.7749996)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_u0t3v")
+
+[node name="RegularHitbox" type="CollisionShape2D" parent="." unique_id=1514422685]
+position = Vector2(0, -1.25)
+shape = SubResource("RectangleShape2D_u0t3v")
+
+[node name="HandstandHitbox" type="CollisionShape2D" parent="." unique_id=1193994825]
+visible = false
+position = Vector2(1.2250004, -7.7749996)
+shape = SubResource("RectangleShape2D_7ksyx")
+disabled = true
