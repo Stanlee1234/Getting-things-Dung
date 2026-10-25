@@ -49,6 +49,7 @@ var highest_y_since_ground: float = 9999.0
 var spawn_settled: bool = false
 var size_tween: Tween = null
 var lock_platform_pos: Vector2 = Vector2.ZERO
+var is_held: bool = false
 
 const SFX_LAND = preload("res://Assets/sfx/land.tres")
 const SFX_TIER_UP = preload("res://Assets/sfx/tier_up.tres")
@@ -76,8 +77,22 @@ func play_sfx(stream: AudioStream, vol: float = 0.0, pitch: float = 1.0) -> void
 		sfx_player.pitch_scale = pitch
 		sfx_player.play()
 
-func set_held(_held: bool) -> void:
-	pass
+func set_held(held: bool) -> void:
+	is_held = held
+	if not held:
+		lock_platform_pos = Vector2.ZERO
+
+func should_lock_ball() -> bool:
+	if is_player_standing_on():
+		return true
+	if is_held:
+		return true
+	if is_instance_valid(beetle) and beetle.charging:
+		var dist: float = global_position.distance_to(beetle.global_position)
+		var b_radius: float = col_shape.shape.radius if (is_instance_valid(col_shape) and col_shape.shape is CircleShape2D) else BASE_RADIUS
+		if dist < b_radius + 180.0 or (beetle.has_method("is_in_zone") and beetle.is_in_zone(self)):
+			return true
+	return false
 
 func is_player_standing_on() -> bool:
 	if not is_instance_valid(beetle):
@@ -96,8 +111,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	else:
 		last_contact_pos = Vector2.ZERO
 
-	# Stable platform: when beetle stands on top of the ball, freeze ball so it doesn't roll or slide
-	if is_player_standing_on():
+	# Stable platform & charge lock: when standing on the ball or charging, freeze ball
+	if should_lock_ball():
 		var b_radius: float = col_shape.shape.radius if (is_instance_valid(col_shape) and col_shape.shape is CircleShape2D) else BASE_RADIUS
 		var space_state = get_world_2d().direct_space_state
 		var b_pos: Vector2 = state.transform.origin
@@ -110,7 +125,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			or not space_state.intersect_ray(ray_dl).is_empty() \
 			or not space_state.intersect_ray(ray_dr).is_empty()
 		
-		if is_grounded:
+		if is_grounded or is_held:
 			if lock_platform_pos == Vector2.ZERO:
 				lock_platform_pos = b_pos
 			state.transform = Transform2D(state.transform.get_rotation(), lock_platform_pos)

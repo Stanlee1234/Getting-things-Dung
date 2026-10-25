@@ -150,6 +150,9 @@ func _physics_process(delta: float) -> void:
 		if charging:
 			charging = false
 			charge_time = 0.0
+			var tb: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
+			if is_instance_valid(tb) and tb.has_method("set_held"):
+				tb.set_held(false)
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 		velocity.y += gravity * delta
 		move_and_slide()
@@ -315,12 +318,16 @@ func _handle_jump(delta: float) -> void:
 			charging = false
 			if is_instance_valid(charge_sfx_player):
 				charge_sfx_player.stop()
+			if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+				target_ball.set_held(false)
 	# Charge Jump
 	elif Input.is_action_pressed("up"):
 		if not charging:
 			if is_instance_valid(charge_sfx_player):
 				charge_sfx_player.pitch_scale = 0.95
 				charge_sfx_player.play()
+			if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+				target_ball.set_held(true)
 		charge_time = min(charge_time + delta, max_charge_time)
 		charging = true
 		if is_instance_valid(charge_sfx_player):
@@ -333,6 +340,8 @@ func _handle_jump(delta: float) -> void:
 	elif Input.is_action_just_released("up") or charging:
 		if is_instance_valid(charge_sfx_player):
 			charge_sfx_player.stop()
+		if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
+			target_ball.set_held(false)
 		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
