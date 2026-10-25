@@ -41,7 +41,7 @@ var input_enabled: bool = true
 @export var speed: float = 160.0
 @export var accel: float = 1200.0
 @export var friction: float = 1400.0
-@export var ball_friction: float = 50.0
+@export var ball_friction: float = 1400.0
 @export var gravity: float = 980.0
 @export var push_force: float = 35.0
 
@@ -126,9 +126,6 @@ func _physics_process(delta: float) -> void:
 		if charging:
 			charging = false
 			charge_time = 0.0
-			var tb: RigidBody2D = ball if is_instance_valid(ball) else ball_in_contact
-			if is_instance_valid(tb) and tb.has_method("set_held"):
-				tb.set_held(false)
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 		velocity.y += gravity * delta
 		move_and_slide()
@@ -151,10 +148,6 @@ func _physics_process(delta: float) -> void:
 	_handle_ground_snap(delta)
 	_handle_jump(delta)
 	
-	# Prevent walking while charging a jump
-	if charging:
-		direction = 0.0
-		
 	_handle_movement(direction, current_friction, delta)
 	_handle_sprite_facing(direction)
 	_handle_squash_animation(delta)
@@ -194,15 +187,36 @@ func _handle_camera_tracking() -> void:
 func is_on_top_of_ball(target_ball: RigidBody2D) -> bool:
 	if not is_instance_valid(target_ball):
 		return false
+	var b_radius: float = 29.0
+	var b_col = target_ball.get_node_or_null("CollisionShape2D")
+	if is_instance_valid(b_col) and b_col.shape is CircleShape2D:
+		b_radius = b_col.shape.radius
+	
 	var dx: float = abs(global_position.x - target_ball.global_position.x)
-	var is_above: bool = global_position.y < target_ball.global_position.y - 10.0
-	if dx < 28.0 and is_above:
-		return true
+	var dy: float = target_ball.global_position.y - global_position.y
+	
+	# Horizontal check: must be within the top dome of the ball
+	if dx > b_radius + 6.0:
+		return false
+	
+	# Vertical check: beetle center must be above ball center and within standing range
+	if dy < b_radius * 0.3 or dy > b_radius + 60.0:
+		return false
+	
+	# Check slide collisions: if actively colliding with ball with upward normal
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
-		if col.get_collider() == target_ball and col.get_normal().y < -0.5:
+		if col.get_collider() == target_ball and col.get_normal().y < -0.3:
 			return true
-	return false
+	
+	# If resting or falling onto the ball (not standing on an independent floor/ledge below ball top)
+	for i in get_slide_collision_count():
+		var col = get_slide_collision(i)
+		if col.get_collider() != target_ball and col.get_normal().y < -0.7:
+			if global_position.y > target_ball.global_position.y - b_radius:
+				return false
+	
+	return true
 
 func is_in_zone(target_ball: RigidBody2D) -> bool:
 	if not is_instance_valid(target_ball):
@@ -274,26 +288,16 @@ func _handle_jump(delta: float) -> void:
 		charge_time = 0.0
 		if charging:
 			charging = false
-			if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
-				target_ball.set_held(false)
 	# Charge Jump
 	elif Input.is_action_pressed("up"):
 		charge_time = min(charge_time + delta, max_charge_time)
 		charging = true
-		
-		# The ball should only stop on boosts, not regular jumps
-		var is_boosting: bool = is_in_zone(target_ball) or is_handstand
-		if is_boosting and is_instance_valid(target_ball) and target_ball.has_method("set_held"):
-			target_ball.set_held(true)
 		
 		# Squish animation while charging
 		var charge_pct: float = charge_time / max_charge_time
 		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
 	# Release Jump
 	elif Input.is_action_just_released("up"):
-		if is_instance_valid(target_ball) and target_ball.has_method("set_held"):
-			target_ball.set_held(false)
-			
 		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
@@ -402,24 +406,24 @@ func _handle_walk_waddle(delta: float) -> void:
 # Ball Push Handling
 #---------------------------------------------------->
 func _handle_ball_pushing(direction: float, pre_vel_x: float) -> void:
-	if charging:
-		return
 	var pushed_ball: bool = false
-	
-	if not charging:
-		ball_in_contact = null
+	ball_in_contact = null
 	
 	# Cannot push the ball while on top of it
-	if is_on_top_of_ball(ball):
+	var target_ball: RigidBody2D = ball if is_instance_valid(ball) else null
+	if is_instance_valid(target_ball) and is_on_top_of_ball(target_ball):
 		return
 	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
 		if col.get_collider() is RigidBody2D:
 			var rb = col.get_collider() as RigidBody2D
+			if is_on_top_of_ball(rb):
+				continue
 			
 			var normal = col.get_normal()
-			if abs(normal.x) > 0.3 and normal.y > -0.7:
+			# Pushing must be horizontal from the side; upward contact normals mean standing on top
+			if abs(normal.x) > 0.4 and normal.y > -0.3:
 				ball_in_contact = rb
 				var push_dir: Vector2
 				if is_on_floor():

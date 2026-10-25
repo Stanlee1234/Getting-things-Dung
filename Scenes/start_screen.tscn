@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://cjoik41umjlxh"]
+
+[ext_resource type="Script" uid="uid://bsqtee56op73c" path="res://Scripts/start_screen.gd" id="1_start"]
+[ext_resource type="Texture2D" uid="uid://d0cnnfbu05ths" path="res://Assets/paperball.png" id="2_ball_tex"]
+[ext_resource type="FontFile" uid="uid://bolj64k7vwg0q" path="res://Assets/augiepixel.ttf" id="3_font"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wall"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_lr"]
+size = Vector2(64, 1200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_tb"]
+size = Vector2(2400, 64)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ball"]
+friction = 0.05
+bounce = 0.98
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ball"]
+radius = 38.0
+
+[node name="StartScreen" type="Control" unique_id=624783018]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_start")
+
+[node name="Background" type="ColorRect" parent="." unique_id=2031291777]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.109804, 0.137255, 1)
+
+[node name="Walls" type="Node2D" parent="." unique_id=1373695669]
+
+[node name="Left" type="StaticBody2D" parent="Walls" unique_id=717916686]
+physics_material_override = SubResource("PhysicsMaterial_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left" unique_id=314209717]
+shape = SubResource("RectangleShape2D_wall_lr")
+
+[node name="Right" type="StaticBody2D" parent="Walls" unique_id=2050098330]
+physics_material_override = SubResource("PhysicsMaterial_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right" unique_id=1000167725]
+shape = SubResource("RectangleShape2D_wall_lr")
+
+[node name="Top" type="StaticBody2D" parent="Walls" unique_id=1797796310]
+physics_material_override = SubResource("PhysicsMaterial_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top" unique_id=1673873809]
+shape = SubResource("RectangleShape2D_wall_tb")
+
+[node name="Bottom" type="StaticBody2D" parent="Walls" unique_id=1507765202]
+physics_material_override = SubResource("PhysicsMaterial_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom" unique_id=1904043731]
+shape = SubResource("RectangleShape2D_wall_tb")
+
+[node name="BouncingBall" type="RigidBody2D" parent="." unique_id=1581763702]
+position = Vector2(320, 240)
+physics_material_override = SubResource("PhysicsMaterial_ball")
+gravity_scale = 0.55
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.05
+angular_damp = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="BouncingBall" unique_id=1473142097]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ball_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BouncingBall" unique_id=60010435]
+shape = SubResource("CircleShape2D_ball")
+
+[node name="BounceParticles" type="CPUParticles2D" parent="BouncingBall" unique_id=1446509853]
+emitting = false
+amount = 12
+lifetime = 0.35
+one_shot = true
+explosiveness = 0.9
+spread = 180.0
+gravity = Vector2(0, 150)
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.95, 0.95, 0.92, 1)
+
+[node name="UI" type="Control" parent="." unique_id=1413187838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1175622562]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -180.0
+offset_right = 280.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UI/VBoxContainer" unique_id=979667222]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.447059, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "GETTING THINGS DUNG"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="UI/VBoxContainer" unique_id=231989995]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.82, 0.82, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 20
+text = "a quest for the job."
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="UI/VBoxContainer" unique_id=1344701137]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.58, 0.65, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 14
+text = "Made for jame gam game jam!"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="UI/VBoxContainer" unique_id=1521125711]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="UI/VBoxContainer" unique_id=1273096559]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 22
+text = "START WORK"
+
+[node name="QuitButton" type="Button" parent="UI/VBoxContainer" unique_id=1781998611]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "QUIT"

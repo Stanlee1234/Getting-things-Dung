@@ -5,6 +5,7 @@ extends Node2D
 @export var thrust_distance: float = 65.0
 
 @export_group("Timing Settings")
+@export var active_loop: bool = true
 @export var interval: float = 2.5
 @export var initial_delay: float = 0.0
 @export var windup_time: float = 0.3
@@ -31,6 +32,7 @@ func _get_worm_sprite() -> CanvasItem:
 	return self
 
 func _ready() -> void:
+	add_to_group("worms")
 	worm_sprite = _get_worm_sprite()
 	originx = worm_sprite.position.x
 	originy = worm_sprite.position.y
@@ -38,22 +40,27 @@ func _ready() -> void:
 	
 	trigger_area.body_entered.connect(_on_body_entered)
 	
-	_start_interval_loop()
+	if active_loop:
+		_start_interval_loop()
+
+func trigger_strike() -> void:
+	if not is_winding_up and not is_extended:
+		_do_launch_cycle()
 
 func _start_interval_loop() -> void:
 	if initial_delay > 0.0:
 		await get_tree().create_timer(initial_delay).timeout
-		if not is_inside_tree():
+		if not is_inside_tree() or not active_loop:
 			return
 	
-	while is_inside_tree():
+	while is_inside_tree() and active_loop:
 		await _do_launch_cycle()
-		if not is_inside_tree():
+		if not is_inside_tree() or not active_loop:
 			return
 		
 		if interval > 0.0:
 			await get_tree().create_timer(interval).timeout
-			if not is_inside_tree():
+			if not is_inside_tree() or not active_loop:
 				return
 
 func _do_launch_cycle() -> void:
@@ -128,6 +135,8 @@ func _launch_body(body: Node) -> void:
 		_apply_screen_shake()
 
 func _apply_screen_shake() -> void:
-	var beetle = get_tree().current_scene.get_node_or_null("Beetle")
+	if not is_inside_tree():
+		return
+	var beetle = get_tree().root.find_child("Beetle", true, false)
 	if is_instance_valid(beetle) and beetle.has_method("add_shake"):
 		beetle.add_shake(0.65)

@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://dpy1plxki2b5r"]
+
+[ext_resource type="Script" uid="uid://b1ccimxyt2oel" path="res://Scripts/end_screen.gd" id="1_end"]
+[ext_resource type="FontFile" uid="uid://bolj64k7vwg0q" path="res://Assets/augiepixel.ttf" id="2_font"]
+
+[node name="EndScreen" type="Control" unique_id=1193242092]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_end")
+
+[node name="Background" type="ColorRect" parent="." unique_id=13387812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.09, 0.11, 1)
+
+[node name="PaperDriftParticles" type="CPUParticles2D" parent="." unique_id=1663253752]
+position = Vector2(576, -20)
+amount = 20
+lifetime = 6.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(600, 10)
+direction = Vector2(0.2, 1)
+spread = 20.0
+gravity = Vector2(0, 30)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 4.5
+color = Color(0.95, 0.95, 0.9, 0.35)
+
+[node name="UI" type="Control" parent="." unique_id=690667878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1839955269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UI/VBoxContainer" unique_id=1965917314]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.447059, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 40
+text = "GETTING THINGS DUNG"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="UI/VBoxContainer" unique_id=779335894]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "game over!"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="UI/VBoxContainer" unique_id=146263941]
+layout_mode = 2
+
+[node name="TwistStamp" type="Label" parent="UI/VBoxContainer" unique_id=799068199]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.38, 0.38, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "[welp, there goes your promotion]"
+horizontal_alignment = 1
+
+[node name="StatsLabel1" type="Label" parent="UI/VBoxContainer" unique_id=1297458857]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "thanks for playing!"
+horizontal_alignment = 1
+
+[node name="StatsLabel2" type="Label" parent="UI/VBoxContainer" unique_id=2123882997]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "Code by: Iceverychill + giorgiothechicken, art by: cat-bouquet + aster"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/VBoxContainer" unique_id=682702515]
+layout_mode = 2
+
+[node name="CreditsTeam" type="Label" parent="UI/VBoxContainer" unique_id=590404411]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 15
+text = "Created for Jame Gam Game Jam in 3 days"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="UI/VBoxContainer" unique_id=527930819]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ButtonGroup" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=1849142953]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="UI/VBoxContainer/ButtonGroup" unique_id=1847361630]
+custom_minimum_size = Vector2(160, 44)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "PLAY AGAIN"
+
+[node name="MenuButton" type="Button" parent="UI/VBoxContainer/ButtonGroup" unique_id=1021761315]
+custom_minimum_size = Vector2(160, 44)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "MAIN MENU"
+
+[node name="QuitButton" type="Button" parent="UI/VBoxContainer/ButtonGroup" unique_id=510565834]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "QUIT"

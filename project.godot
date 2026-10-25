@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Getting things Dung"
-run/main_scene="uid://ci58w1ohgxhip"
+run/main_scene="res://Scenes/start_screen.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://2d4dspdvgb6h"
