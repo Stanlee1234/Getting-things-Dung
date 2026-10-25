@@ -21,6 +21,9 @@ var originy: float = 0.0
 @onready var trigger_area: Area2D = $TriggerArea
 @onready var worm_sprite: CanvasItem = _get_worm_sprite()
 
+const SFX_WORM_LAUNCH = preload("res://Assets/sfx/worm_launch.tres")
+var sfx_player: AudioStreamPlayer2D
+
 signal ball_launched(ball: RigidBody2D)
 
 func _get_worm_sprite() -> CanvasItem:
@@ -32,6 +35,11 @@ func _get_worm_sprite() -> CanvasItem:
 	return self
 
 func _ready() -> void:
+	sfx_player = AudioStreamPlayer2D.new()
+	sfx_player.name = "WormSfxPlayer"
+	sfx_player.stream = SFX_WORM_LAUNCH
+	add_child(sfx_player)
+	
 	add_to_group("worms")
 	worm_sprite = _get_worm_sprite()
 	originx = worm_sprite.position.x

@@ -50,6 +50,9 @@ var spawn_settled: bool = false
 var size_tween: Tween = null
 var lock_platform_pos: Vector2 = Vector2.ZERO
 
+const SFX_LAND = preload("res://Assets/sfx/land.tres")
+const SFX_TIER_UP = preload("res://Assets/sfx/tier_up.tres")
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var col_shape: CollisionShape2D = $CollisionShape2D
 @onready var land_particles: CPUParticles2D = $LandParticles
@@ -57,10 +60,21 @@ var lock_platform_pos: Vector2 = Vector2.ZERO
 @onready var paper_burst_particles: CPUParticles2D = $PaperBurstParticles
 
 @onready var beetle = get_parent().get_node_or_null("Beetle")
+var sfx_player: AudioStreamPlayer2D
 
 func _ready() -> void:
+	sfx_player = AudioStreamPlayer2D.new()
+	sfx_player.name = "BallSfxPlayer"
+	add_child(sfx_player)
 	body_entered.connect(_on_body_entered)
 	highest_y_since_ground = global_position.y
+
+func play_sfx(stream: AudioStream, vol: float = 0.0, pitch: float = 1.0) -> void:
+	if stream and is_instance_valid(sfx_player):
+		sfx_player.stream = stream
+		sfx_player.volume_db = vol
+		sfx_player.pitch_scale = pitch
+		sfx_player.play()
 
 func set_held(_held: bool) -> void:
 	pass
@@ -170,10 +184,7 @@ func trigger_coworker_event() -> void:
 		paper_drop_particles.restart()
 		paper_drop_particles.emitting = true
 	
-	# 2. Juicy ball growth to 0.18 scale
-	_apply_size_change(Vector2(0.18, 0.18), 34.8, true)
-	
-	# 3. Impact screen shake
+	# 2. Impact screen shake
 	if is_instance_valid(beetle) and beetle.has_method("add_shake"):
 		beetle.add_shake(0.7)
 
@@ -196,6 +207,7 @@ func _advance_tier() -> void:
 	var target_scale_val: float = TIERS[current_tier - 1]["scale"]
 	var target_radius: float = TIERS[current_tier - 1]["radius"]
 	_apply_size_change(Vector2(target_scale_val, target_scale_val), target_radius, true)
+	play_sfx(SFX_TIER_UP, 0.0)
 	
 	# Paper drop burst from above current ball position
 	if is_instance_valid(paper_drop_particles):
@@ -268,6 +280,7 @@ func _on_body_entered(_body: Node) -> void:
 	# Drops or hard hits
 	if impact_speed > 160.0:
 		var impact_pct: float = clamp((impact_speed - 120.0) / 450.0, 0.15, 1.0)
+		play_sfx(SFX_LAND, clamp((impact_speed - 160.0) / 200.0, 0.0, 3.0), randf_range(0.9, 1.1))
 		
 		# Screen shake
 		if is_instance_valid(beetle):

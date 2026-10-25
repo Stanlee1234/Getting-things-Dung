@@ -34,6 +34,14 @@ var input_enabled: bool = true
 # Ball Kicking
 @onready var kick_particles: CPUParticles2D = $KickParticles
 
+const SFX_JUMP = preload("res://Assets/sfx/jump.tres")
+const SFX_KICK = preload("res://Assets/sfx/kick.tres")
+const SFX_CHARGE = preload("res://Assets/sfx/charge.tres")
+const SFX_LAND = preload("res://Assets/sfx/land.tres")
+
+var sfx_player: AudioStreamPlayer2D
+var charge_sfx_player: AudioStreamPlayer2D
+
 #---------------------------------------------------->
 # Export Variables
 #---------------------------------------------------->
@@ -75,6 +83,22 @@ func _ready() -> void:
 	floor_snap_length = 16.0
 	floor_constant_speed = true
 	_set_handstand_mode(false)
+	
+	sfx_player = AudioStreamPlayer2D.new()
+	sfx_player.name = "BeetleSfxPlayer"
+	add_child(sfx_player)
+	
+	charge_sfx_player = AudioStreamPlayer2D.new()
+	charge_sfx_player.name = "BeetleChargeSfxPlayer"
+	charge_sfx_player.stream = SFX_CHARGE
+	add_child(charge_sfx_player)
+
+func play_sfx(stream: AudioStream, vol: float = 0.0, pitch: float = 1.0) -> void:
+	if stream and is_instance_valid(sfx_player):
+		sfx_player.stream = stream
+		sfx_player.volume_db = vol
+		sfx_player.pitch_scale = pitch
+		sfx_player.play()
 
 func _set_handstand_mode(active: bool) -> void:
 	if is_handstand == active:
@@ -148,8 +172,9 @@ func _physics_process(delta: float) -> void:
 	_handle_ground_snap(delta)
 	_handle_jump(delta)
 	
+	if not charging:
+		_handle_sprite_facing(direction)
 	_handle_movement(direction, current_friction, delta)
-	_handle_sprite_facing(direction)
 	_handle_squash_animation(delta)
 	_handle_walk_waddle(delta)
 	
@@ -288,20 +313,31 @@ func _handle_jump(delta: float) -> void:
 		charge_time = 0.0
 		if charging:
 			charging = false
+			if is_instance_valid(charge_sfx_player):
+				charge_sfx_player.stop()
 	# Charge Jump
 	elif Input.is_action_pressed("up"):
+		if not charging:
+			if is_instance_valid(charge_sfx_player):
+				charge_sfx_player.pitch_scale = 0.95
+				charge_sfx_player.play()
 		charge_time = min(charge_time + delta, max_charge_time)
 		charging = true
+		if is_instance_valid(charge_sfx_player):
+			charge_sfx_player.pitch_scale = 0.95 + 0.35 * (charge_time / max_charge_time)
 		
 		# Squish animation while charging
 		var charge_pct: float = charge_time / max_charge_time
 		sprite_squash = Vector2(1.0 + 0.35 * charge_pct, 1.0 - 0.35 * charge_pct)
 	# Release Jump
 	elif Input.is_action_just_released("up") or charging:
+		if is_instance_valid(charge_sfx_player):
+			charge_sfx_player.stop()
 		var can_boost: bool = is_in_zone(target_ball)
 		
 		if can_boost:
 			velocity = Vector2.ZERO
+			play_sfx(SFX_KICK, 1.5, randf_range(0.95, 1.05))
 			
 			# Jump calculations
 			var launch_x: float = sign(target_ball.global_position.x - global_position.x)
@@ -334,6 +370,7 @@ func _handle_jump(delta: float) -> void:
 			# Regular jumping
 			velocity.y = lerp(min_jump_v, max_jump_v, charge_time / max_charge_time)
 			sprite_squash = Vector2(0.7, 1.35)
+			play_sfx(SFX_JUMP, -1.0, randf_range(0.95, 1.05))
 		
 		charge_time = 0.0
 		charging = false
@@ -342,7 +379,9 @@ func _handle_jump(delta: float) -> void:
 # Horizontal Movement
 #---------------------------------------------------->
 func _handle_movement(direction: float, current_friction: float, delta: float) -> void:
-	if direction != 0.0:
+	if charging:
+		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+	elif direction != 0.0:
 		velocity.x = move_toward(velocity.x, direction * speed, accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, current_friction * delta)
@@ -364,6 +403,7 @@ func _handle_squash_animation(delta: float) -> void:
 	# Impact squish on landing
 	if is_on_floor() and not was_on_floor_last_frame and velocity.y >= 0:
 		sprite_squash = Vector2(1.3, 0.7)
+		play_sfx(SFX_LAND, -6.0, randf_range(1.2, 1.4))
 	was_on_floor_last_frame = is_on_floor()
 	
 	# Smoothly spring back to normal when not actively holding jump
