@@ -90,6 +90,30 @@ theme_override_font_sizes/font_size = 18
 text = "[welp, there goes your promotion]"
 horizontal_alignment = 1
 
+[node name="TimeContainer" type="VBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ClearTimeLabel" type="Label" parent="UI/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.95, 0.5, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "CLEAR TIME: 00:00.00"
+horizontal_alignment = 1
+
+[node name="BestTimeLabel" type="Label" parent="UI/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.447059, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 17
+text = "PERSONAL BEST: 00:00.00"
+horizontal_alignment = 1
+
 [node name="StatsLabel1" type="Label" parent="UI/VBoxContainer" unique_id=1297458857]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)

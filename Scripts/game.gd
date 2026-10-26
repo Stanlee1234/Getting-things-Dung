@@ -6,6 +6,49 @@ extends Node2D
 @onready var beetle = $Beetle
 @onready var control_bubble = get_node_or_null("LevelControls")
 @onready var music_player: AudioStreamPlayer = get_node_or_null("MusicPlayer")
+@onready var timer_label: Label = get_node_or_null("UI/SpeedrunHUD/TimerLabel")
+@onready var pb_label: Label = get_node_or_null("UI/SpeedrunHUD/PBLabel")
+
+# ==========================================
+# SPEEDRUN SYSTEM
+# ==========================================
+const PB_SAVE_PATH = "user://speedrun_pb.dat"
+
+static var final_speedrun_time: float = 0.0
+static var is_last_run_pb: bool = false
+static var pb_time: float = -1.0
+
+static func format_time(seconds: float) -> String:
+	if seconds < 0.0:
+		seconds = 0.0
+	var total_msec: int = int(seconds * 1000.0)
+	var mins: int = total_msec / 60000
+	var secs: int = (total_msec % 60000) / 1000
+	var msecs: int = (total_msec % 1000) / 10
+	return "%02d:%02d.%02d" % [mins, secs, msecs]
+
+static func load_best_time() -> float:
+	if pb_time > 0.0:
+		return pb_time
+	if not FileAccess.file_exists(PB_SAVE_PATH):
+		return -1.0
+	var f = FileAccess.open(PB_SAVE_PATH, FileAccess.READ)
+	if f == null:
+		return -1.0
+	pb_time = f.get_float()
+	f.close()
+	return pb_time
+
+static func save_best_time(time_sec: float) -> void:
+	pb_time = time_sec
+	var f = FileAccess.open(PB_SAVE_PATH, FileAccess.WRITE)
+	if f != null:
+		f.store_float(time_sec)
+		f.close()
+
+var speedrun_time: float = 0.0
+var speedrun_active: bool = false
+var ball_missing_hint_cooldown: float = -999.0
 
 var jump_controls: Node2D = null
 var ball_controls: Node2D = null
@@ -73,7 +116,17 @@ var last_drop_time: float = -999.0
 const DROP_COOLDOWN: float = 7.0
 
 func _ready() -> void:
-	# 0. Start looping background music on repeat
+	# 0. Initialize Speedrun HUD
+	var best = load_best_time()
+	if is_instance_valid(pb_label):
+		if best > 0.0:
+			pb_label.text = "PB: " + format_time(best)
+		else:
+			pb_label.text = "PB: --:--.--"
+	if is_instance_valid(timer_label):
+		timer_label.text = "00:00.00"
+
+	# Start looping background music on repeat
 	if is_instance_valid(music_player):
 		music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 		if not music_player.finished.is_connected(_on_music_finished):
@@ -222,7 +275,11 @@ func _connect_zones() -> void:
 			if not cw_root.body_entered.is_connected(_on_coworker_area_body_entered):
 				cw_root.body_entered.connect(_on_coworker_area_body_entered)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	if speedrun_active:
+		speedrun_time += delta
+		_update_speedrun_display()
+
 	if is_instance_valid(voice_player) and is_instance_valid(beetle):
 		voice_player.global_position = beetle.global_position
 
@@ -235,10 +292,23 @@ func _process(_delta: float) -> void:
 		_check_worm_trigger()
 		_check_ceo_trigger()
 
+func _update_speedrun_display() -> void:
+	if is_instance_valid(timer_label):
+		timer_label.text = format_time(speedrun_time)
+
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_R or event.physical_keycode == KEY_R:
+			restart_run()
+			return
+
 	if event.is_action_pressed("ui_accept") or (event is InputEventKey and event.pressed and not event.echo and (event.keycode == KEY_SPACE or event.physical_keycode == KEY_SPACE)):
 		if is_narrating():
 			skip_current_narration()
+
+func restart_run() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 func is_narrating() -> bool:
 	return is_intro_playing or (is_instance_valid(voice_player) and voice_player.playing)
@@ -373,22 +443,27 @@ func _trigger_worm_voiceline() -> void:
 	else:
 		play_voice(INTRO_VOICE_4, intro4_captions)
 
+func _is_at_summit(node: Node2D) -> bool:
+	return is_instance_valid(node) and node.global_position.x >= 900.0 and node.global_position.y <= -650.0
+
 func _check_ceo_trigger() -> void:
 	if ceo_ending_triggered:
 		return
 	var ball = get_node_or_null("DungBall")
-	
-	# Check summit penthouse area: X >= 950 and Y <= -680
-	var beetle_at_summit: bool = is_instance_valid(beetle) and beetle.global_position.x >= 950.0 and beetle.global_position.y <= -680.0
-	var ball_at_summit: bool = is_instance_valid(ball) and ball.global_position.x >= 950.0 and ball.global_position.y <= -680.0
-	if beetle_at_summit or ball_at_summit:
-		_trigger_ceo_end_event()
+	if not is_instance_valid(beetle) or not is_instance_valid(ball):
 		return
-
+	
+	# Check summit penthouse area: both beetle and ball must be at summit
+	var beetle_at_summit: bool = _is_at_summit(beetle)
+	var ball_at_summit: bool = _is_at_summit(ball)
+	
+	# Check CeoDesk / CeoArea collision
 	var ceo_area = get_tree().root.find_child("CeoDesk", true, false)
 	if not is_instance_valid(ceo_area):
 		ceo_area = get_tree().root.find_child("CeoArea", true, false)
 		
+	var ball_in: bool = false
+	var beetle_in: bool = false
 	if is_instance_valid(ceo_area):
 		var area_node: Area2D = ceo_area if ceo_area is Area2D else ceo_area.get_node_or_null("Area2D")
 		if is_instance_valid(area_node):
@@ -396,21 +471,59 @@ func _check_ceo_trigger() -> void:
 			if is_instance_valid(col) and col.shape is RectangleShape2D:
 				var half_size: Vector2 = col.shape.size * 0.5
 				var center: Vector2 = col.global_position
-				var ball_in: bool = is_instance_valid(ball) and abs(ball.global_position.x - center.x) <= half_size.x and abs(ball.global_position.y - center.y) <= half_size.y
-				var beetle_in: bool = is_instance_valid(beetle) and abs(beetle.global_position.x - center.x) <= half_size.x and abs(beetle.global_position.y - center.y) <= half_size.y
-				if ball_in or beetle_in:
-					_trigger_ceo_end_event()
-
-func _on_ceo_desk_body_entered(body: Node2D) -> void:
-	var ball = get_node_or_null("DungBall")
-	if body == beetle or body == ball or (is_instance_valid(ball) and body == ball):
+				ball_in = abs(ball.global_position.x - center.x) <= half_size.x and abs(ball.global_position.y - center.y) <= half_size.y
+				beetle_in = abs(beetle.global_position.x - center.x) <= half_size.x and abs(beetle.global_position.y - center.y) <= half_size.y
+	
+	# Finish is ONLY valid when BOTH beetle AND ball are at the summit / CEO desk
+	var both_at_summit: bool = beetle_at_summit and ball_at_summit
+	var both_reached_ceo: bool = (ball_in and beetle_in) or (ball_in and beetle_at_summit) or (beetle_in and ball_at_summit)
+	
+	if both_at_summit or both_reached_ceo:
 		_trigger_ceo_end_event()
+	elif beetle_in or (beetle_at_summit and not ball_at_summit):
+		# Player reached summit without the ball! Give hint
+		_show_ball_missing_hint()
+
+func _on_ceo_desk_body_entered(_body: Node2D) -> void:
+	_check_ceo_trigger()
+
+func _show_ball_missing_hint() -> void:
+	var now = Time.get_ticks_msec() / 1000.0
+	if now - ball_missing_hint_cooldown < 3.5:
+		return
+	ball_missing_hint_cooldown = now
+	if not (is_instance_valid(voice_player) and voice_player.playing):
+		if is_instance_valid(subtitle_label):
+			subtitle_label.text = "[Where's the paperwork? Bring the dung ball to the CEO!]"
+			var t = create_tween()
+			t.tween_interval(3.0)
+			t.tween_callback(func():
+				if is_instance_valid(subtitle_label) and subtitle_label.text == "[Where's the paperwork? Bring the dung ball to the CEO!]":
+					subtitle_label.text = ""
+			)
 
 func _trigger_ceo_end_event() -> void:
 	if ceo_ending_triggered:
 		return
 	ceo_ending_triggered = true
 	is_ending = true
+	
+	# Stop speedrun timer and record results
+	speedrun_active = false
+	final_speedrun_time = speedrun_time
+	var current_pb = load_best_time()
+	if current_pb <= 0.0 or speedrun_time < current_pb:
+		is_last_run_pb = true
+		save_best_time(speedrun_time)
+	else:
+		is_last_run_pb = false
+		
+	if is_instance_valid(timer_label):
+		timer_label.text = format_time(final_speedrun_time)
+		timer_label.add_theme_color_override("font_color", Color(0.4, 0.95, 0.5, 1.0))
+	if is_instance_valid(pb_label) and is_last_run_pb:
+		pb_label.text = "NEW PB!"
+		pb_label.add_theme_color_override("font_color", Color(1.0, 0.84, 0.0, 1.0))
 	
 	if is_instance_valid(beetle):
 		beetle.input_enabled = false
@@ -525,6 +638,12 @@ func _on_intro_finished() -> void:
 	if is_instance_valid(skip_label):
 		skip_label.visible = false
 	
+	# Start speedrun timer
+	speedrun_time = 0.0
+	speedrun_active = true
+	if is_instance_valid(timer_label):
+		timer_label.text = "00:00.00"
+
 	# Unpause the game immediately so the ball falls down
 	get_tree().paused = false
 	
